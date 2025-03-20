@@ -9,14 +9,15 @@
     --dashboard-width: 1000px;
     --dashboard-width-mobile: 920px;
 
-    --green1:hsl(70, 20%, 25%);
-    --green2:hsl(70, 20%, 35%);
-    --green3:hsl(70, 20%, 45%);
-    --green4:hsl(70, 20%, 55%);
-    --green5:hsl(70, 20%, 65%);
-    --green6:hsl(70, 20%, 75%);
-    --green7:hsl(70, 30%, 85%);
-    --green8:hsl(70, 30%, 95%);
+    --green1:hsl(70, 20%, 20%);
+    --green2:hsl(70, 20%, 30%);
+    --green3:hsl(70, 20%, 40%);
+    --green4:hsl(70, 20%, 50%);
+    --green5:hsl(70, 20%, 60%);
+    --green6:hsl(70, 20%, 70%);
+    --green7:hsl(70, 30%, 80%);
+    --green8:hsl(70, 30%, 90%);
+    --green85:hsl(70, 30%, 95%);
     --green9:hsl(70, 30%, 99%);
 
     --blue1:hsl(200, 30%, 25%);

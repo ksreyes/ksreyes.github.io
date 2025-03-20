@@ -22,12 +22,13 @@
 }
 
 .project-tile-link {
+    outline: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     height: 100%;
-    color: var(--green3);
+    color: var(--green2);
     font-weight: normal;
     padding: .8rem .6rem 1rem .6rem;
 }
@@ -39,7 +40,7 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: white;
+    background-color: var(--green85);
     border: 5px solid var(--green7);
 }
 
@@ -68,14 +69,15 @@
 }
 
 .project-tile-link .project-tile-desc {
-    color: var(--green4);
+    color: var(--green3);
     font-weight: normal;
 }
 
 /*** Hover effects ***************************************************************/
 
+.project-tile-link:focus-visible .project-tile-box, 
 .project-tile:hover .project-tile-box {
-    background-color: var(--green8);
+    background-color: var(--green9);
     border-color: var(--green4);
     transform: scale(1.01);
     transition: 
@@ -84,11 +86,13 @@
         transform .1s ease-in;
 }
 
+.project-tile-link:focus-visible .project-tile-title,
 .project-tile:hover .project-tile-title {
     color: var(--green1);
     transition: color .1s ease-in;
 }
 
+.project-tile-link:focus-visible .project-tile-desc,
 .project-tile:hover .project-tile-desc {
     color: var(--green2);
     transition: color .1s ease-in;
