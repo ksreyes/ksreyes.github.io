@@ -1,7 +1,7 @@
-import { popden } from "./popden-icon.js";
-import { econ } from "./econ-icon.js";
-import { mrio } from "./mrio-icon.js";
-import { mmp } from "./mmp-icon.js";
+import { popden } from "./icons/popden-icon.js";
+import { econ } from "./icons/econ-icon.js";
+import { mrio } from "./icons/mrio-icon.js";
+import { mmp } from "./icons/mmp-icon.js";
 
 d3.select("#popden div").call(popden);
 d3.select("#econ div").call(econ);

@@ -6,7 +6,8 @@
     <title>Kenneth S. Reyes</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
-    <script src="https://unpkg.com/geometric@2.5.5/build/geometric.js"></script>
+    <!-- <script src="https://unpkg.com/geometric@2.5.5/build/geometric.js"></script> -->
+    <script src="https://unpkg.com/geometric@2.5.5"></script>
     <script src="https://unpkg.com/d3-force-limit"></script>
     <script src="https://unpkg.com/d3-force-surface"></script>
     <script src="https://unpkg.com/d3-force-bounce"></script>
@@ -35,7 +36,7 @@
 
             <div class="hero-bio">
                 <h1>My name is <span class="emph">Ken</span>,</h1>
-                <p>and I make charts using code. My interests lie at the intersection of <span class="emph"><b>data science</b></span>, <span class="emph"><b>web development</b></span>, and <span class="emph"><b>graphic design</b></span>.</p>
+                <p>and I make charts using code. My interests lie at the intersection of <span class="emph"><b>data analysis</b></span>, <span class="emph"><b>web development</b></span>, and <span class="emph"><b>graphic design</b></span>.</p>
                 <p>Based in Berlin since 2024.</p>
                 <div class="hero-buttons">
                     <a href=""><div class="hero-button">CV</div></a>
@@ -70,7 +71,7 @@
 
                 <!-- Population density -->
                 <div class="project-tile" id="popden">
-                    <a href="./particles/index.html" class="project-tile-link">
+                    <a href="particles" class="project-tile-link">
                         <div class="project-tile-logo"></div>
                         <span class="project-tile-title">People As Particles</span>
                         <p class="project-tile-desc">Looking at population density in a new way</p>
@@ -90,7 +91,7 @@
 
                 <!-- Missing Migrants -->
                 <div class="project-tile" id="mmp">
-                    <a href="" class="project-tile-link">
+                    <a href="missing-migrants" class="project-tile-link">
                         <div class="project-tile-logo"></div>
                         <span class="project-tile-title">Missing Migrants Graphic</span>
                         <p class="project-tile-desc">Tallying the costs of irregular migration</p>
@@ -100,12 +101,12 @@
 
                 <!-- Snapshot -->
                 <div class="project-tile" id="snapshot">
-                    <a href="./snapshot/index.html" class="project-tile-link">
+                    <a href="remittances" class="project-tile-link">
                         <div class="project-tile-logo">
                             <img src="./assets/images/snapshot-sample.jpg">
                         </div>
-                        <span class="project-tile-title">Snapshot</span>
-                        <p class="project-tile-desc">Automated generation of statistical reports</p>
+                        <span class="project-tile-title">Bilateral Remittances</span>
+                        <p class="project-tile-desc">A geospatial network graph</p>
                         <div class="project-tile-box"></div>
                     </a>
                 </div>
@@ -129,10 +130,10 @@
 
     <footer>
         <div class="page-footer">
-            <div class="copyright"> Copyright © 2025 Kenneth S. Reyes</div>
+            <div class="copyright">Copyright © 2025 Kenneth S. Reyes</div>
         </div>
     </footer>
 
-    <script type="module" src="assets/js/home/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>
