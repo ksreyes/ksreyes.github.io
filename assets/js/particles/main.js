@@ -1,7 +1,12 @@
-
-import { popden } from "../home/popden-icon.js";
+import { popden } from "../icons/popden-icon.js";
 import { addFormsAnnotation, addLegendAnnotation } from "./annotations.js";
 import * as colors from "../colors.js";
+
+// Icon ///////////////////////////////////////////////////////////////////////
+
+d3.select(".page-icon").call(popden);
+
+// Dashboard //////////////////////////////////////////////////////////////////
 
 const params = { 
     width: 450, 
@@ -13,14 +18,6 @@ const params = {
 };
 params.rSD = params.rMean * .75;
 params.velocity = params.rMean * .80;
-
-
-// Icon ///////////////////////////////////////////////////////////////////////
-
-d3.select(".page-icon").call(popden);
-
-
-// Dashboard //////////////////////////////////////////////////////////////////
 
 d3.select("#particles-container .annotation.annotation-forms")
     .call(addFormsAnnotation, params);
