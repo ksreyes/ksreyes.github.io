@@ -304,55 +304,38 @@
 .remittances-icon {
 
     & .bg {
-        fill: white;
-        opacity: 0;
+        fill: var(--blue7);
+        opacity: .5;
     }
 
-    & .border {
-        /* fill: var(--green7); */
-        fill: var(--green1);
+    & .land {
+        fill: var(--green6);
         fill-opacity: .6;
         transition: fill-opacity .1s ease-in;
     }
 
-    & .link {
-        stroke-opacity: 0;
+    & .node {
+        fill: var(--blue3);
+        fill-opacity: .2;
+        stroke: var(--blue1);
+        stroke-width: 1px;
+        stroke-opacity: .2;
         transition: 
-            stroke-opacity .75s ease-in;
-        
-        &.highlight {
-            stroke: var(--red2);
-            stroke-opacity: .4;
-            transition: 
-                stroke .75s ease-in,
-                stroke-opacity .75s ease-in;
-        }
+            stroke-opacity .25s;
     }
 
-    & .node {
-        fill: var(--blue4);
-        fill-opacity: .3;
-        stroke: var(--blue3);
-        stroke-width: 1px;
-        stroke-opacity: .3;
+    & .link {
+        stroke-opacity: 0;
+        stroke-width: .1px;
         transition: 
-            fill .25s ease-in, 
-            stroke .25s ease-in,
-            stroke-width .25s ease-in,
-            stroke-opacity .25s;
+            stroke-opacity .1s ease-in;
         
-        &.highlight {
-            fill: var(--red4);
-            fill-opacity: .8;
-            stroke: var(--red2);
-            stroke-width: 1.1px;
-            stroke-opacity: .5;
+        &.in-force {
+            stroke: var(--blue5);
+            stroke-opacity: 0;
             transition: 
-                fill .5s ease-in, 
-                fill-opacity .5s ease-in, 
-                stroke .5s ease-in,
-                stroke-width .5s ease-in,
-                stroke-opacity .5s ease-in;
+                stroke 1s ease-in,
+                stroke-opacity 1s ease-in;
         }
     }
 }
@@ -360,38 +343,22 @@
 #remittances.project-tile:hover, .title-block .remittances-icon {
 
     & .bg {
-        fill: var(--blue6);
+        fill: var(--blue7);
         opacity: 1;
         transition: opacity .1s ease-in;
     }
 
-    & .border {
-        fill-opacity: .9;
+    & .land {
+        fill-opacity: .8;
         transition: fill-opacity .1s ease-in;
     }
 
     & .node {
-        fill: var(--blue6);
-        fill-opacity: .9;
-        stroke: var(--blue1);
+        fill-opacity: .4;
         stroke-opacity: .4;
         transition: 
-            fill .1s ease-in, 
             fill-opacity .1s ease-in, 
-            stroke .1s ease-in,
             stroke-opacity .1s;
-
-        &.highlight {
-            fill: var(--red3);
-            fill-opacity: 1;
-            stroke: var(--red1);
-            stroke-opacity: 1;
-            transition: 
-                fill .1s ease-in, 
-                fill-opacity .1s ease-in, 
-                stroke .1s ease-in,
-                stroke-opacity .1s ease-in;
-        }
     }
 }
 

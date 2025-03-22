@@ -3,13 +3,24 @@
     box-sizing: border-box;
 }
 
+* {
+    font: inherit;
+}
+
 body {
     font-family: var(--body-font-family), sans-serif;
+    font-size: 0.75rem;
+    font-size: clamp(0.75rem, 0.65rem + 0.5vw, 1rem);
     background-color: var(--green8);
     color: hsl(0, 0%, 20%);
     padding-top: 10rem;
 }
 
+h1 {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    font-weight: 600;
+}
 ::selection {
     background: var(--yellow4);
   }

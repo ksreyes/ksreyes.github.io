@@ -1,128 +1,171 @@
-
 export function remittancesIcon(container) {
 
     Promise.all([
     
-        d3.json("/assets/data/land-110m.json"),
-        d3.csv("/assets/data/remt-nodes-icon.csv"),
-        d3.csv("/assets/data/remt-links-icon.csv")
+        d3.csv("/assets/data/remt-nodes.csv"),
+        d3.csv("/assets/data/remt-links.csv"),
+        d3.json("/assets/data/world_map.json")
     
-    ]).then(function([mapRaw, nodesRaw, linksRaw]) {
+    ]).then(function([nodesRaw, linksRaw, mapRaw]) {
     
-        const heroes = ["ESP", "IND", "FRA", "UKR", "PAK", "ITA"];
-
-        const map = topojson.feature(mapRaw, mapRaw.objects.land).features;
-        const links = linksRaw;
-        const nodes = nodesRaw.map(d => ({
-            iso: d.iso,
-            size: d.size,
-            coords: [d.longitude, d.latitude]
+        const links = linksRaw.map(d => ({
+            source: d.from,
+            target: d.to,
+            share: d.share
         }));
         
-        drawMap(container, map, nodes, links, heroes);  
+        const nodes = nodesRaw.map(d => ({
+            iso: d.iso,
+            size: isNaN(+d.size) ? 0 : +d.size,
+            coords: [+d.longitude, +d.latitude]
+        }));
+        
+        const map = topojson.feature(mapRaw, mapRaw.objects.countries).features;
+        
+        drawNetwork(container, nodes, links, map);  
     });
 };
 
-function drawMap(container, map, nodes, links, heroes) {
+function drawNetwork(container, nodes, links, map) {
 
     const dim = { width: 120, height: 110 };
     const params = { 
-        scale: 55, 
-        linkWidthMin: 1,
-        linkWidthMax: 8, 
+        scale: 30, 
+        pushleft: 10,
+        pushdown: 0,
         radiusMin: 1, 
-        radiusMax: 10
+        radiusMax: 7
     };
 
     // Data
 
-    const minLinkValue = d3.min(links, d => 100 * +d.share);
-    const maxLinkValue = d3.max(links, d => 100 * +d.share);
     const minNodeValue = d3.min(nodes, d => +d.size);
     const maxNodeValue = d3.max(nodes, d => +d.size);
 
-    console.log(minNodeValue);
-    const strokeScaler = d3.scaleLinear()
-        .domain([minLinkValue, maxLinkValue])
-        .range([params.linkWidthMin, params.linkWidthMax]);
-    
     const rScaler = d3.scaleLinear()
         .domain([minNodeValue, maxNodeValue])
         .range([params.radiusMin, params.radiusMax]);
 
-    // Map
-
-    const projection = d3.geoMercator()
-        .scale(params.scale)
-        .center([28, 25])
-        .translate([dim.width / 2, dim.height / 2])
-
-    let path = d3.geoPath().projection(projection);
-
     const svg = container.append("svg")
-        .attr("width", dim.width)
-        .attr("height", dim.height)
-
+        .attr("width", "100%")
+        .attr("viewBox", [-dim.width / 2, -dim.height / 2, dim.width, dim.height]);
+    
     svg.append("rect")
         .attr("class", "bg")
-        .attr("x", 0)
-        .attr("y", 0)
+        .attr("x", -dim.width / 2)
+        .attr("y", -dim.height / 2)
         .attr("width", dim.width)
         .attr("height", dim.height);
-    
-    svg.selectAll("country")
+
+    // Map
+
+    const projection = d3.geoNaturalEarth1()
+        .scale(params.scale)
+        .center([params.pushleft, params.pushdown])
+        .translate([0, dim.height / 16]);
+
+    const path = d3.geoPath().projection(projection);
+
+    const countries = svg.append("g")
+        .selectAll("country")
         .data(map)
         .join("path")
-        .attr("class", "border")
-        .attr("d", path)
-    
-    // Network
+        .attr("class", "land")
+        .attr("d", path);
 
-    let link = svg.append("g")
-        .attr("class", "links")
+    // Forces
 
-    link.selectAll("line")
+    const forceNode = d3.forceManyBody().strength(0);
+    const forceLink = d3.forceLink(links).id(d => d.iso);
+    const simulation = d3.forceSimulation(nodes)
+        .force("link", forceLink)
+        .force("charge", forceNode)
+        .force("center",  d3.forceCenter())
+        .alphaDecay(0);
+
+    // Nodes and links – initial rendering
+
+    const link = svg.append("g")
+        .selectAll("line")
         .data(links)
         .join("line")
-        .attr("class", d => "link " + nodes.find((node) => node.iso == d.to).iso)
-        .attr("stroke-width", d => strokeScaler(100 * +d.share))
-        .attr("x1", d => projection(nodes.find((node) => node.iso == d.from).coords)[0])
-        .attr("x2", d => projection(nodes.find((node) => node.iso == d.to).coords)[0])
-        .attr("y1", d => projection(nodes.find((node) => node.iso == d.from).coords)[1])
-        .attr("y2", d => projection(nodes.find((node) => node.iso == d.to).coords)[1]);
+        .attr("class", d => "link " + nodes.find((node) => node.iso == d.target.iso).iso)
+        .attr("x1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[0])
+        .attr("x2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[0])
+        .attr("y1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[1])
+        .attr("y2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[1]);  
 
-    let group = svg.append("g")
-        .attr("class", "bubble")
-
-    const groupData = group.selectAll("g")
+    const node = svg.append("g")
+        .selectAll("circle")
         .data(nodes)
-        .order()
-        .join("g")
-        .attr("transform", d => `translate(${ projection(d.coords)[0] } , ${ projection(d.coords)[1] })`);
-
-    groupData
-        .append("circle")
-        .attr("class", d => "node " + d.iso)
+        .join("circle")
+        .attr("class", "node")
         .attr("r", d => rScaler(d.size))
+        .attr("cx", d => projection(d.coords)[0])
+        .attr("cy", d => projection(d.coords)[1])
+        .attr("value", d => d.iso);
 
-    render(heroes[5]);
+    // Toggle
 
-    // Highlight
+    let toggleState = false;
 
-    let index = 0;
+    function toggleStates() {
+        if (toggleState) {
+            renderMap();
+            toggleState = !toggleState;
+            setTimeout(toggleStates, 2000);
+        } else {
+            renderNetwork();
+            toggleState = !toggleState;
+            setTimeout(toggleStates, 3000);
+        };
+    };
 
-    d3.interval(function() {
-        let hero = heroes[index];
-        index = (index + 1) % heroes.length;
-        render(hero);    
-    }, 2000);
+    setTimeout(toggleStates, 1000);
 
-    function render(hero) {
-        d3.selectAll(".remittances-icon .node").classed("highlight", false);
-        d3.selectAll(".remittances-icon .link").classed("highlight", false);
-        d3.selectAll(".remittances-icon ." + hero).classed("highlight", true);
+    // Render functions
+
+    function renderMap() {
+
+        simulation.stop();
+
+        countries.transition().ease(d3.easeLinear).duration(1000)
+            .style("opacity", 1);
+
+        d3.selectAll(".link").classed("in-force", false);
+
+        node.transition().ease(d3.easeLinear).duration(1000)
+            .attr("cx", d => projection(d.coords)[0])
+            .attr("cy", d => projection(d.coords)[1]);
+
+        link.transition().ease(d3.easeLinear).duration(1000)
+            .attr("x1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[0])
+            .attr("x2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[0])
+            .attr("y1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[1])
+            .attr("y2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[1]);  
+    };
+
+    function renderNetwork() {
+        
+        countries.transition().ease(d3.easeLinear).style("opacity", 0);
+        
+        d3.selectAll(".link").classed("in-force", true);
+        
+        simulation.on("tick", ticked).alpha(1).restart();
+    };
+    
+    function ticked() {
+            
+        node.transition().ease(d3.easeLinear).duration(1000)
+            .attr("cx", d => d.x)
+            .attr("cy", d => d.y);
+
+        link.transition().ease(d3.easeLinear)
+            .attr("x1", d => d.source.x)
+            .attr("y1", d => d.source.y)
+            .attr("x2", d => d.target.x)
+            .attr("y2", d => d.target.y);
     };
 
     return container.node();
 };
-

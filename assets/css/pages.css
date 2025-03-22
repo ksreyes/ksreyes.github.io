@@ -18,7 +18,8 @@
 }
 
 .page-subtitle {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
+    font-size: clamp(0.9rem, 0.78rem + 0.6vw, 1.2rem);
     margin: 0;
 }
 
@@ -45,97 +46,174 @@
     font-size: .8em;
 }
 
-/*** Particles ***************************************************************/
-
-#particles-container .annotation {
-    display: flex;
-    justify-content: center;
-}
-
-#particles-container #annotation-arrow {
-    stroke-linejoin: "round";
-    stroke: var(--red1);
-    stroke-width: 2px;
-    fill: none;
-}
-
-#particles-container .annotation-arrow {
-    stroke: var(--red1);
-    stroke-width: 2px;
-    fill: none;
-}
-
-#particles-container .annotation-text {
-    font-family: "Playpen Sans", sans-serif;
-    font-size: .9em;
-    fill: var(--red1);
-    text-anchor: middle;
-}
-
-#particles-container .annotation-forms .annotation-text {
-    transform: rotate(-5deg);
-}
-
-#particles-container .annotation-legend .annotation-text {
-    transform: none;
-}
-
-#particles-container .forms {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    width: var(--dashboard-width);
-}
-
-#particles-container .form {
-    display: flex;
-    align-items: center;
-    margin: 15px 0px;
-}
-
-#particles-container form#particles-dropdown select {
-    font: var(--body-font-family);
-    font-size: 1em;
-    width: 250px;
-    height: auto;
-}
-
-#particles-container .legend {
-    display: flex;
-    justify-content: center;
-}
-
-#particles-container .panels {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-
-#particles-container .panel {
+.tooltip {
+    display: none;
+    position: absolute;
+    z-index: 999;
     width: auto;
     height: auto;
+    background: none;
+    font-family: "Playpen Sans", sans-serif;
+    color: var(--red1);
+
+    &.show {
+        display: block;
+        position: absolute;
+    }
 }
 
-#particles-container .panel-bg {
-    fill: var(--green9);
-    stroke: var(--green7);
-    stroke-width: 7px;
+/*** Particles ***************************************************************/
+
+& {
+
+    & .annotation {
+        display: flex;
+        justify-content: center;
+    }
+
+    & #annotation-arrow {
+        stroke-linejoin: "round";
+        stroke: var(--red1);
+        stroke-width: 2px;
+        fill: none;
+    }
+
+    & .annotation-arrow {
+        stroke: var(--red1);
+        stroke-width: 2px;
+        fill: none;
+    }
+
+    & .annotation-text {
+        font-family: "Playpen Sans", sans-serif;
+        font-size: .9em;
+        fill: var(--red1);
+        text-anchor: middle;
+    }
+
+    & .annotation-forms .annotation-text {
+        transform: rotate(-5deg);
+    }
+
+    & .annotation-legend .annotation-text {
+        transform: none;
+    }
+
+    & .forms {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        width: var(--dashboard-width);
+    }
+    
+    & .form {
+        display: flex;
+        align-items: center;
+        margin: 15px 0px;
+
+        &#particles-dropdown select {
+            font: var(--body-font-family);
+            font-size: 1em;
+            width: 250px;
+            height: auto;
+        }
+    }
+    
+    & .legend {
+        display: flex;
+        justify-content: center;
+    }
+    
+    & .panels {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+    
+    & .panel {
+        width: auto;
+        height: auto;
+    }
+    
+    & .panel-bg {
+        fill: var(--green9);
+        stroke: var(--green7);
+        stroke-width: 7px;
+    }
 }
+
 
 /*** Remittances *******************************/
+
+.toggle-button {
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
+    padding: 0 auto;
+
+    & .button {
+        background-color: var(--green3);
+        width: 4rem;
+        height: 2rem;
+        border-radius: 4rem;
+        cursor: pointer;
+        position: relative;
+        transition: .2s;
+        display: flex;
+        align-items: center;
+    }
+    
+    & .button:before {
+        position: absolute;
+        content: "";
+        background-color: white;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 1.5rem;
+        margin-left: .25rem;
+        transition: .2s;
+    }
+    
+    & input:checked + .button {
+        background-color: var(--red2);
+    }
+
+    & input:checked + .button::before {
+        transform: translateX(2rem);
+    }
+
+    & input {
+        display: none;
+    }
+
+    & .toggle-label {
+        color: var(--gray4);
+        font-size: 0.75rem;
+        font-size: clamp(0.75rem, 0.65rem + 0.5vw, 1rem);
+
+        &.left {
+            justify-self: end;
+        }
+
+        &.on {
+            color: var(--green1);
+            font-weight: 600;
+        }
+    }
+}
 
 #remittances-container {
 
     & .bg {
-        /* fill: var(--blue6); */
-        /* fill: var(--yellow5); */
-        /* opacity: .2; */
         fill: var(--blue7);
-        /* stroke: var(--green7);
-        stroke-width: 3px; */
     }
 
-    & .border {
+    & .land {
         fill: var(--green6);
         fill-opacity: .8;
         stroke: var(--blue7);
@@ -156,7 +234,7 @@
 
         &.highlight {
             fill: var(--red3);
-            fill-opacity: 1;
+            fill-opacity: .9;
             stroke: var(--red1);
             stroke-opacity: 1;
             transition: 
@@ -168,18 +246,28 @@
     }
 
     & .link {
-        stroke-opacity: .1;
-        stroke: var(--gray4);
-        /* stroke-opacity: .2; */
+        stroke-opacity: 0;
         transition: 
-            stroke-opacity .75s ease-in;
+            stroke-opacity .1s ease-in;
         
         &.highlight {
-            stroke: var(--red2);
-            stroke-opacity: .4;
+            stroke: var(--red2) !important;
+            stroke-opacity: .4 !important;
             transition: 
-                stroke .75s ease-in,
-                stroke-opacity .75s ease-in;
+                stroke .1s ease-in,
+                stroke-opacity .1s ease-in;
         }
+
+        &.in-force {
+            stroke: var(--blue5);
+            stroke-opacity: .1;
+            transition: 
+                stroke .1s ease-in,
+                stroke-opacity .1s ease-in;
+        }
+    }
+
+    & .highlight {
+        cursor: pointer;
     }
 }
