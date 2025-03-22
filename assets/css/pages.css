@@ -122,3 +122,64 @@
     stroke-width: 7px;
 }
 
+/*** Remittances *******************************/
+
+#remittances-container {
+
+    & .bg {
+        /* fill: var(--blue6); */
+        /* fill: var(--yellow5); */
+        /* opacity: .2; */
+        fill: var(--blue7);
+        /* stroke: var(--green7);
+        stroke-width: 3px; */
+    }
+
+    & .border {
+        fill: var(--green6);
+        fill-opacity: .8;
+        stroke: var(--blue7);
+        stroke-width: .25px;
+        transition: fill-opacity .1s ease-in;
+    }
+
+    & .node {
+        fill: var(--blue3);
+        fill-opacity: .4;
+        stroke: var(--blue1);
+        stroke-opacity: .4;
+        transition: 
+            fill .1s ease-in, 
+            fill-opacity .1s ease-in, 
+            stroke .1s ease-in,
+            stroke-opacity .1s;
+
+        &.highlight {
+            fill: var(--red3);
+            fill-opacity: 1;
+            stroke: var(--red1);
+            stroke-opacity: 1;
+            transition: 
+                fill .1s ease-in, 
+                fill-opacity .1s ease-in, 
+                stroke .1s ease-in,
+                stroke-opacity .1s ease-in;
+        }
+    }
+
+    & .link {
+        stroke-opacity: .1;
+        stroke: var(--gray4);
+        /* stroke-opacity: .2; */
+        transition: 
+            stroke-opacity .75s ease-in;
+        
+        &.highlight {
+            stroke: var(--red2);
+            stroke-opacity: .4;
+            transition: 
+                stroke .75s ease-in,
+                stroke-opacity .75s ease-in;
+        }
+    }
+}

@@ -49,7 +49,7 @@
     justify-content: center;
     align-items: center;
     width: 120px;
-    height: 120px;
+    height: 110px;
     overflow: hidden;
 }
 
@@ -297,5 +297,101 @@
     0% { transform: translateY(20%); }
     50% { transform: translateY(-20%); }
     100% { transform: translateY(20%); }
+}
+
+/* Remittances */
+
+.remittances-icon {
+
+    & .bg {
+        fill: white;
+        opacity: 0;
+    }
+
+    & .border {
+        /* fill: var(--green7); */
+        fill: var(--green1);
+        fill-opacity: .6;
+        transition: fill-opacity .1s ease-in;
+    }
+
+    & .link {
+        stroke-opacity: 0;
+        transition: 
+            stroke-opacity .75s ease-in;
+        
+        &.highlight {
+            stroke: var(--red2);
+            stroke-opacity: .4;
+            transition: 
+                stroke .75s ease-in,
+                stroke-opacity .75s ease-in;
+        }
+    }
+
+    & .node {
+        fill: var(--blue4);
+        fill-opacity: .3;
+        stroke: var(--blue3);
+        stroke-width: 1px;
+        stroke-opacity: .3;
+        transition: 
+            fill .25s ease-in, 
+            stroke .25s ease-in,
+            stroke-width .25s ease-in,
+            stroke-opacity .25s;
+        
+        &.highlight {
+            fill: var(--red4);
+            fill-opacity: .8;
+            stroke: var(--red2);
+            stroke-width: 1.1px;
+            stroke-opacity: .5;
+            transition: 
+                fill .5s ease-in, 
+                fill-opacity .5s ease-in, 
+                stroke .5s ease-in,
+                stroke-width .5s ease-in,
+                stroke-opacity .5s ease-in;
+        }
+    }
+}
+
+#remittances.project-tile:hover, .title-block .remittances-icon {
+
+    & .bg {
+        fill: var(--blue6);
+        opacity: 1;
+        transition: opacity .1s ease-in;
+    }
+
+    & .border {
+        fill-opacity: .9;
+        transition: fill-opacity .1s ease-in;
+    }
+
+    & .node {
+        fill: var(--blue6);
+        fill-opacity: .9;
+        stroke: var(--blue1);
+        stroke-opacity: .4;
+        transition: 
+            fill .1s ease-in, 
+            fill-opacity .1s ease-in, 
+            stroke .1s ease-in,
+            stroke-opacity .1s;
+
+        &.highlight {
+            fill: var(--red3);
+            fill-opacity: 1;
+            stroke: var(--red1);
+            stroke-opacity: 1;
+            transition: 
+                fill .1s ease-in, 
+                fill-opacity .1s ease-in, 
+                stroke .1s ease-in,
+                stroke-opacity .1s ease-in;
+        }
+    }
 }
 
