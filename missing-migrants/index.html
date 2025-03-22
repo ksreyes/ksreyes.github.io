@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Migrants Graphic | Kenneth S. Reyes</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <script src="https://unpkg.com/geometric@2.5.5"></script>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/vars.css">
+    <link rel="stylesheet" href="../assets/css/tiles.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+
+<body>
+    
+    <header class="site-header">
+        <a href="../index.html" class="nav-title">Kenneth S. Reyes</a>
+        <span class="nav-email">kenneth.rejes@gmail.com</span>
+    </header>
+
+    <main>
+
+        <article class="content-grid">
+
+            <header class="title-block">
+                <div class="page-icon"></div>
+                <div class="page-title">
+                    <h1>Missing Migrants Graphic</h1>
+                </div>
+                <span class="page-subtitle">Tallying the costs of irregular migration across borders</span>
+            </header>
+
+            <section>
+
+                <p><b>Manila</b> is the densest city on Earth, fitting 1.8 million people into a 43 square-kilometer crucible. The 16 other cities that constitute Metro Manila, the Philippine capital, are extraordinarily crowded as well, resulting in an overall density of 22,000/km². This is twice that of New York and almost three times that of Singapore.</p>
+        
+                <p>To make these numbers more evocative, I devised what I call a <b>particles chart</b>. Compare the density of a Metro Manila city to other global cities below through the visual of colliding particles.</p>
+
+            </section>
+
+            <section class="breakout">
+
+                <div class="screen-warning">Best viewed on desktop screens.</div>
+                
+                <div id="mmp-container" class="graphic-container">
+                    
+                </div>
+
+            </section>
+
+            <section>
+
+                <p>I have set the balls to generate at various sizes, reflecting the fact that some people take up <b>more space</b> than others. Think private vehicles versus public transport, detached homes versus high-rise condominiums. The balls are also colored in proportion to <b>ethnic makeup</b>, defined as where your ancestors were living in the year 1500. Migrant ancestor balls are colored by originating continent, ordered from largest to smallest shares.</p>
+
+            </section>
+    
+            <section class="page-notes">
+                <h3>Notes</h3>
+                <p>Created using D3 with additional modules from <a href="https://github.com/vasturiano">vasturiano</a>. City density data were taken from Wikipedia. Migrant makeup is from Putterman and Weil's <a href="https://sites.google.com/brown.edu/louis-putterman/world-migration-matrix-1500-2000">World Migration Matrix</a>. Originally published as a <a href="https://twopoints.blog/posts/2023-03-29-people-as-particles/">blog post</a>.</p>
+            </section>
+
+        </article>
+    
+    </main>
+    
+    <footer>
+        <div class="page-footer">
+            <div class="copyright"> Copyright © 2025 Kenneth S. Reyes</div>
+        </div>
+    </footer>
+    
+    <script type="module" src="../assets/js/missing-migrants/main.js"></script>
+
+</body>
+</html>
