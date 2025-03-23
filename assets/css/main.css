@@ -7,6 +7,10 @@
     font: inherit;
 }
 
+img {
+    max-width: 100%;
+}
+
 body {
     font-family: var(--body-font-family), sans-serif;
     font-size: 0.75rem;
@@ -147,8 +151,11 @@ a:hover {
     margin-left: 1.5rem;
 }
 
+.hero-pic {
+    flex-basis: 100%;
+}
 .hero-pic img {
-    width: min(30vw, 300px);
+    width: 300px;
     height: 100%;
     object-fit: cover;
 }

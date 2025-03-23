@@ -1,23 +1,24 @@
-export function remittancesIcon(container) {
+export function tradeIcon(container) {
 
     Promise.all([
     
-        d3.csv("/assets/data/remt-nodes.csv"),
-        d3.csv("/assets/data/remt-links.csv"),
+        d3.csv("/assets/data/trade-nodes.csv"),
+        d3.csv("/assets/data/trade-links.csv"),
         d3.json("/assets/data/world_map.json")
     
     ]).then(function([nodesRaw, linksRaw, mapRaw]) {
     
         const links = linksRaw.map(d => ({
-            source: d.from,
-            target: d.to,
-            share: d.share
+            source: +d.source,
+            target: +d.target,
+            v: +d.v
         }));
         
         const nodes = nodesRaw.map(d => ({
-            iso: d.iso,
-            size: isNaN(+d.size) ? 0 : +d.size,
-            coords: [+d.longitude, +d.latitude]
+            id: +d.id,
+            name: d.country,
+            v: +d.v,
+            coords: [+d.lon, +d.lat]
         }));
         
         const map = topojson.feature(mapRaw, mapRaw.objects.countries).features;
@@ -39,8 +40,8 @@ function drawNetwork(container, nodes, links, map) {
 
     // Data
 
-    const minNodeValue = d3.min(nodes, d => +d.size);
-    const maxNodeValue = d3.max(nodes, d => +d.size);
+    const minNodeValue = d3.min(nodes, d => d.v);
+    const maxNodeValue = d3.max(nodes, d => d.v);
 
     const rScaler = d3.scaleLinear()
         .domain([minNodeValue, maxNodeValue])
@@ -62,7 +63,7 @@ function drawNetwork(container, nodes, links, map) {
     const projection = d3.geoNaturalEarth1()
         .scale(params.scale)
         .center([params.pushleft, params.pushdown])
-        .translate([0, dim.height / 10]);
+        .translate([0, dim.height / 8]);
 
     const path = d3.geoPath().projection(projection);
 
@@ -75,8 +76,8 @@ function drawNetwork(container, nodes, links, map) {
 
     // Forces
 
-    const forceNode = d3.forceManyBody().strength(0);
-    const forceLink = d3.forceLink(links).id(d => d.iso);
+    const forceNode = d3.forceManyBody().strength(-2);
+    const forceLink = d3.forceLink(links).id(d => d.id);
     const simulation = d3.forceSimulation(nodes)
         .force("link", forceLink)
         .force("charge", forceNode)
@@ -89,21 +90,21 @@ function drawNetwork(container, nodes, links, map) {
         .selectAll("line")
         .data(links)
         .join("line")
-        .attr("class", d => "link " + nodes.find((node) => node.iso == d.target.iso).iso)
-        .attr("x1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[0])
-        .attr("x2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[0])
-        .attr("y1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[1])
-        .attr("y2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[1]);  
+        .attr("class", d => "link id-" + nodes.find((node) => node.id == d.target.id).id)
+        .attr("x1", d => projection(nodes.find((node) => node.id == d.source.id).coords)[0])
+        .attr("x2", d => projection(nodes.find((node) => node.id == d.target.id).coords)[0])
+        .attr("y1", d => projection(nodes.find((node) => node.id == d.source.id).coords)[1])
+        .attr("y2", d => projection(nodes.find((node) => node.id == d.target.id).coords)[1]);  
 
     const node = svg.append("g")
         .selectAll("circle")
         .data(nodes)
         .join("circle")
         .attr("class", "node")
-        .attr("r", d => rScaler(d.size))
+        .attr("r", d => rScaler(d.v))
         .attr("cx", d => projection(d.coords)[0])
         .attr("cy", d => projection(d.coords)[1])
-        .attr("value", d => d.iso);
+        .attr("value", d => d.id);
 
     // Toggle
 
@@ -132,24 +133,24 @@ function drawNetwork(container, nodes, links, map) {
         countries.transition().ease(d3.easeLinear).duration(1000)
             .style("opacity", 1);
 
-        d3.selectAll(".remittances-icon .link").classed("in-force", false);
+        d3.selectAll(".trade-icon .link").classed("in-force", false);
 
         node.transition().ease(d3.easeLinear).duration(1000)
             .attr("cx", d => projection(d.coords)[0])
             .attr("cy", d => projection(d.coords)[1]);
 
         link.transition().ease(d3.easeLinear).duration(1000)
-            .attr("x1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[0])
-            .attr("x2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[0])
-            .attr("y1", d => projection(nodes.find((node) => node.iso == d.source.iso).coords)[1])
-            .attr("y2", d => projection(nodes.find((node) => node.iso == d.target.iso).coords)[1]);  
+        .attr("x1", d => projection(nodes.find((node) => node.id == d.source.id).coords)[0])
+        .attr("x2", d => projection(nodes.find((node) => node.id == d.target.id).coords)[0])
+        .attr("y1", d => projection(nodes.find((node) => node.id == d.source.id).coords)[1])
+        .attr("y2", d => projection(nodes.find((node) => node.id == d.target.id).coords)[1]);  
     };
 
     function renderNetwork() {
         
         countries.transition().ease(d3.easeLinear).style("opacity", 0);
         
-        d3.selectAll(".remittances-icon .link").classed("in-force", true);
+        d3.selectAll(".trade-icon .link").classed("in-force", true);
         
         simulation.on("tick", ticked).alpha(1).restart();
     };

@@ -299,9 +299,9 @@
     100% { transform: translateY(20%); }
 }
 
-/* Remittances */
+/* Trade */
 
-.remittances-icon {
+.trade-icon {
     
     .title-block & {
         background: var(--blue8);
@@ -347,7 +347,7 @@
     }
 }
 
-#remittances.project-tile:hover, .title-block .remittances-icon {
+#trade.project-tile:hover, .title-block .trade-icon {
 
     & .bg {
         fill: var(--blue7);

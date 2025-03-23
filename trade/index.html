@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizing Trade | Kenneth S. Reyes</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson@3"></script>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/vars.css">
+    <link rel="stylesheet" href="../assets/css/tiles.css">
+    <link rel="stylesheet" href="../assets/css/pages.css">
+</head>
+
+<body>
+    
+    <div class="tooltip"></div>
+
+    <header class="site-header">
+        <a href="../index.html" class="nav-title">Kenneth S. Reyes</a>
+        <span class="nav-email">kenneth.rejes@gmail.com</span>
+    </header>
+
+    <main>
+
+        <article class="content-grid">
+
+            <header class="title-block">
+                <div class="page-icon trade-icon"></div>
+                <div class="page-title">
+                    <h1>Visualizing Trade</h1>
+                </div>
+                <span class="page-subtitle">Geospatial versus force-directed network graphs</span>
+            </header>
+
+            <section>
+                <p>International trade is a classic example of a network. Because nodes are countries, an attractive way to visualize this is to use geospatial positioning – that is, superimposing the network onto a map. This allows users to parse complex relationships against familiar geography.</p>
+
+                <p>At the same time, this approach has a few weaknesses: see for instance how tiny Europe crams many large nodes. A bigger shortcoming is that a key part of network science is lost, which is in studying the centrality of nodes in a network. An alternative visualization is a force-directed graph, where physics simulations determine the positioning of nodes. In an interactive setting, users may even be able to drag nodes around to see their impact on other nodes.</p>
+
+                <p>The choice of visualization depends ultimately on the use case. Toggle below between either approach and compare them for yourself.</p>
+
+            </section>
+
+            <section class="breakout" id="trade-container">
+
+                <div class="toggle-button">
+                    <div class="toggle-label left on">Geospatial</div>
+                    <input type="checkbox" id="toggle">
+                    <label for="toggle" class="button"></label>
+                    <div class="toggle-label right">Force-directed</div>
+                </div>
+                
+                <div class="graphic-container"></div>
+                <div class="chart-source">
+                    <p>Edge thickness is mapped to the value of import flows while node size is mapped to total imports. Highlighting a node shows the country's top import partners.</p>
+                    <p>Source: UN COMTRADE (via CEPII BACI).</p></div>
+
+            </section>
+
+            <section class="page-notes">
+                <h3>Notes</h3>
+                <p>Charts were created using D3 while data wrangling was done in R. The primary source of trade data is <a href="https://comtrade.un.org/">UN COMTRADE</a>. A validated version of this is provided by the <a href="https://www.cepii.fr/CEPII/en/bdd_modele/bdd_modele_item.asp?id=37">CEPII BACI dataset</a>, which is released with a lag of two years. The above values are therefore for 2023. For visual clarity, only the top ten import partners of any given country are visible. </p>
+            </section>
+
+        </article>
+    
+    </main>
+    
+    <footer>
+        <div class="page-footer">
+            <div class="copyright"> Copyright © 2025 Kenneth S. Reyes</div>
+        </div>
+    </footer>
+    
+    <script type="module" src="../assets/js/trade/main.js"></script>
+
+</body>
+</html>
