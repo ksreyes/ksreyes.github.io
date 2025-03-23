@@ -33,7 +33,6 @@ export function remittancesNetwork(container) {
 
         const map = topojson.feature(mapRaw, mapRaw.objects.countries).features;
         
-        console.log(nodes);
         drawNetwork(container, nodes, links, map);  
     });
 };
@@ -94,18 +93,13 @@ function drawNetwork(container, nodes, links, map) {
 
     // Forces
 
-
-    console.log("Nodes: " + nodes)
-
-    const forceNode = d3.forceManyBody()
-        .strength(-35);
+    const forceNode = d3.forceManyBody().strength(-35);
     const forceLink = d3.forceLink(links).id(d => d.iso);
     const simulation = d3.forceSimulation(nodes)
         .force("link", forceLink)
         .force("charge", forceNode)
         .force("center",  d3.forceCenter())
         .alphaDecay(0);
-
 
     // Nodes and links – initial rendering
 
@@ -199,7 +193,7 @@ function drawNetwork(container, nodes, links, map) {
             .attr("y2", d => d.target.y);
     };
 
-    function mouseMoved(event, d) {
+    function mouseMoved(event) {
         d3.select(this).classed("highlight", true);
         let selected = d3.select(this).attr("value");
         d3.selectAll("." + selected).classed("highlight", true);
@@ -208,12 +202,13 @@ function drawNetwork(container, nodes, links, map) {
             .style("display", "block")
             .style("left", event.pageX + 18 + "px")
             .style("top", event.pageY + 18 + "px")
-            .html(name)
+            .html(name);
     };
 
     function mouseLeft() {
         d3.selectAll(".graphic-container .highlight")
             .classed("highlight", false);
+        d3.select(".tooltip").style("display", "none");
     };
 
     function drag(simulation) {    

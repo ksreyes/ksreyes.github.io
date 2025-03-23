@@ -6,7 +6,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: clamp(1.25rem, 0.78125rem + 1.875vw, 2rem);
 }
 
 .page-icon {
@@ -21,6 +21,7 @@
     font-size: 0.9rem;
     font-size: clamp(0.9rem, 0.78rem + 0.6vw, 1.2rem);
     margin: 0;
+    text-wrap: balance;
 }
 
 .screen-warning {
@@ -43,8 +44,14 @@
 }
 
 .page-notes {
-    font-size: .8em;
+    font-size: .8rem;
 }
+
+.chart-source {
+    font-size: .7rem;
+    color: var(--green3);
+}
+
 
 .tooltip {
     display: none;
@@ -146,20 +153,23 @@
 /*** Remittances *******************************/
 
 .toggle-button {
+    --btn-width: 2.5rem;
+    --btn-height: 1.25rem;
+
     width: auto;
     height: auto;
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: .8rem;
     margin: 1rem;
     padding: 0 auto;
 
     & .button {
         background-color: var(--green3);
-        width: 4rem;
-        height: 2rem;
+        width: var(--btn-width);
+        height: var(--btn-height);
         border-radius: 4rem;
         cursor: pointer;
         position: relative;
@@ -172,10 +182,10 @@
         position: absolute;
         content: "";
         background-color: white;
-        width: 1.5rem;
-        height: 1.5rem;
-        border-radius: 1.5rem;
-        margin-left: .25rem;
+        width: calc(var(--btn-height) * .7);
+        height: calc(var(--btn-height) * .7);
+        border-radius: calc(var(--btn-height) * .7);
+        margin-left: calc(var(--btn-height) * .15);
         transition: .2s;
     }
     
@@ -184,7 +194,7 @@
     }
 
     & input:checked + .button::before {
-        transform: translateX(2rem);
+        transform: translateX(calc(var(--btn-width) - var(--btn-height)));
     }
 
     & input {

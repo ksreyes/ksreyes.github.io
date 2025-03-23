@@ -302,10 +302,17 @@
 /* Remittances */
 
 .remittances-icon {
+    
+    .title-block & {
+        background: var(--blue8);
+        border: 1.5px solid var(--blue7);
+        border-radius: 20px;
+    }
 
     & .bg {
         fill: var(--blue7);
         opacity: .5;
+        opacity: 0;
     }
 
     & .land {
@@ -344,7 +351,8 @@
 
     & .bg {
         fill: var(--blue7);
-        opacity: 1;
+        /* opacity: 1; */
+        opacity: 0;
         transition: opacity .1s ease-in;
     }
 

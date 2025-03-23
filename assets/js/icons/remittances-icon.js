@@ -62,7 +62,7 @@ function drawNetwork(container, nodes, links, map) {
     const projection = d3.geoNaturalEarth1()
         .scale(params.scale)
         .center([params.pushleft, params.pushdown])
-        .translate([0, dim.height / 16]);
+        .translate([0, dim.height / 10]);
 
     const path = d3.geoPath().projection(projection);
 
@@ -132,7 +132,7 @@ function drawNetwork(container, nodes, links, map) {
         countries.transition().ease(d3.easeLinear).duration(1000)
             .style("opacity", 1);
 
-        d3.selectAll(".link").classed("in-force", false);
+        d3.selectAll(".remittances-icon .link").classed("in-force", false);
 
         node.transition().ease(d3.easeLinear).duration(1000)
             .attr("cx", d => projection(d.coords)[0])
@@ -149,7 +149,7 @@ function drawNetwork(container, nodes, links, map) {
         
         countries.transition().ease(d3.easeLinear).style("opacity", 0);
         
-        d3.selectAll(".link").classed("in-force", true);
+        d3.selectAll(".remittances-icon .link").classed("in-force", true);
         
         simulation.on("tick", ticked).alpha(1).restart();
     };
