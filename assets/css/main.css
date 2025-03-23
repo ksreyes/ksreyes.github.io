@@ -31,6 +31,13 @@ h1 {
     }
 }
 
+h2 {
+    font-size: 1rem;
+    font-size: clamp(1rem, 0.825rem + 1.5vw, 1.5rem);
+    font-weight: 600;
+    text-align: center;
+}
+
 h3 {
     font-size: 0.9rem;
     font-size: clamp(0.9rem, 0.8375rem + 0.25vw, 1rem);
@@ -43,6 +50,10 @@ h3 {
 
 strong {
     font-weight: 700;
+}
+
+emph {
+    font-style: italic;
 }
 
 hr {

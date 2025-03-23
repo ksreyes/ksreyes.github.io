@@ -26,40 +26,32 @@
         <article class="content-grid">
 
             <header class="title-block">
-                <div class="page-icon"></div>
+                <div class="page-icon mmp-icon"></div>
                 <div class="page-title">
                     <h1>Missing Migrants Graphic</h1>
                 </div>
-                <span class="page-subtitle">Tallying the costs of irregular migration across borders</span>
+                <span class="page-subtitle">Tallying the costs of irregular international migration</span>
             </header>
 
             <section>
 
-                <p><b>Manila</b> is the densest city on Earth, fitting 1.8 million people into a 43 square-kilometer crucible. The 16 other cities that constitute Metro Manila, the Philippine capital, are extraordinarily crowded as well, resulting in an overall density of 22,000/km². This is twice that of New York and almost three times that of Singapore.</p>
-        
-                <p>To make these numbers more evocative, I devised what I call a <b>particles chart</b>. Compare the density of a Metro Manila city to other global cities below through the visual of colliding particles.</p>
+                <p>Since 2014, the <a href="https://missingmigrants.iom.int/"><strong>Missing Migrants Project</strong></a> has been tallying the deaths and disappearances of migrants in the act of international migration. They consult various sources including administrative data and news reports, but due to the nature of such things, their tallies are very likely undercounts. For their ten year anniversary, I developed an <a href="">interactive graphic</a> for them that presents the grim reality of irregular migration. A version of this is reproduced below.</p>
 
             </section>
 
-            <section class="breakout">
+            <section class="breakout" id="mmp-container">
 
-                <div class="screen-warning">Best viewed on desktop screens.</div>
-                
-                <div id="mmp-container" class="graphic-container">
-                    
+                <div class="graphic-container">
+                    <div class="legend-color"></div>
+                    <div class="legend-spike"></div>
+                    <div class="control-panel"></div>
                 </div>
-
-            </section>
-
-            <section>
-
-                <p>I have set the balls to generate at various sizes, reflecting the fact that some people take up <b>more space</b> than others. Think private vehicles versus public transport, detached homes versus high-rise condominiums. The balls are also colored in proportion to <b>ethnic makeup</b>, defined as where your ancestors were living in the year 1500. Migrant ancestor balls are colored by originating continent, ordered from largest to smallest shares.</p>
 
             </section>
     
             <section class="page-notes">
                 <h3>Notes</h3>
-                <p>Created using D3 with additional modules from <a href="https://github.com/vasturiano">vasturiano</a>. City density data were taken from Wikipedia. Migrant makeup is from Putterman and Weil's <a href="https://sites.google.com/brown.edu/louis-putterman/world-migration-matrix-1500-2000">World Migration Matrix</a>. Originally published as a <a href="https://twopoints.blog/posts/2023-03-29-people-as-particles/">blog post</a>.</p>
+                <p>Graphic was created using D3 while data wrangling was done in R. Map data are from a <a href="https://github.com/topojson/world-atlas">TopoJSON redistribution</a> of <a href="https://www.naturalearthdata.com/">Natural Earth</a> data. The script for rendering spikes on a globe was adapted from a <a href="https://observablehq.com/@washpostgraphics/spike-globe"><emph>Washington Post</emph> graphic</a>. Data was downloaded from the <a href="https://missingmigrants.iom.int/downloads">Missing Migrants Project website</a> on 10 March 2025.</p>
             </section>
 
         </article>
@@ -73,6 +65,7 @@
     </footer>
     
     <script type="module" src="../assets/js/missing-migrants/main.js"></script>
+    <script type="module" src="../assets/js/missing-migrants/legend.js"></script>
 
 </body>
 </html>

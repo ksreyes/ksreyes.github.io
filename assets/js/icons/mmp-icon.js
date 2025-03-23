@@ -1,10 +1,8 @@
-
-
 export function mmp(container) {
 
     Promise.all([
     
-        d3.json("./assets/data/land-110m.json")
+        d3.json("/assets/data/land-110m.json")
     
     ]).then(function([mapRaw]) {
     
@@ -39,16 +37,16 @@ function drawMap(container, map) {
         .attr("viewBox", [0, 0, dim.width, dim.height])
         .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
     
-    let globe = svg.append("circle")
+    svg.append("circle")
         .attr("class", "globe")
         .attr("cx", dim.width / 2)
         .attr("cy", dim.height / 2)
         .attr("r", params.scale);
 
-    let country = svg.selectAll("country")
+    svg.selectAll("country")
         .data(map)
         .enter().append("path")
-        .attr("class", "country")
+        .attr("class", "land")
         .attr("d", path);
     
     // Generate dummy data
@@ -144,4 +142,4 @@ function drawMap(container, map) {
     };
 
     return container.node();
-}
+};

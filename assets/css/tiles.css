@@ -31,6 +31,11 @@
     color: var(--green2);
     font-weight: normal;
     padding: .8rem .6rem 1rem .6rem;
+
+    & .project-tile-desc {
+        color: var(--green3);
+        font-weight: normal;
+    }
 }
 
 .project-tile-box {
@@ -68,12 +73,7 @@
     margin: 0;
 }
 
-.project-tile-link .project-tile-desc {
-    color: var(--green3);
-    font-weight: normal;
-}
-
-/*** Hover effects ***************************************************************/
+/*** Hover effects *****************************/
 
 .project-tile-link:focus-visible .project-tile-box, 
 .project-tile:hover .project-tile-box {
@@ -98,23 +98,23 @@
     transition: color .1s ease-in;
 }
 
-/*** Project-specific ***************************************************************/
+/*** Project-specific **************************/
 
 /* Two Points */
 
-#twopoints .project-tile-logo img {
-    opacity: .7;
-    width: 100px;
-    height: auto;
-    animation-name: rotate;
-    animation-duration: 30s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
+#twopoints {
 
-#twopoints.project-tile:hover img {
-    opacity: .9;
-    transition: opacity .1s ease-in;
+    & .project-tile-logo img {
+        opacity: .7;
+        width: 100px;
+        height: auto;
+        animation: rotate 30s linear infinite;
+    }
+    
+    &.project-tile:hover img {
+        opacity: .9;
+        transition: opacity .1s ease-in;
+    }
 }
 
 @keyframes rotate {
@@ -124,77 +124,93 @@
 
 /* Particles */
 
-#popden rect {
-    fill: none;
-}
+#popden {
 
-#popden circle {
-    fill: var(--green4);
-}
-
-#popden.project-tile:hover circle {
-    fill: var(--green3);
-    transition: fill .1s ease-in;
+    & rect {
+        fill: none;
+    }
+    
+    & circle {
+        fill: var(--green4);
+    }
+    
+    &.project-tile:hover circle {
+        fill: var(--green3);
+        transition: fill .1s ease-in;
+    }
 }
 
 /* Learning Curves */
 
-#econ path {
-    opacity: .5;
-}
+#econ {
 
-#econ #econ-axes {
-    opacity: 1;
-    stroke: var(--green5);
-    stroke-width: 3px;
-}
+    & path {
+        opacity: .5;
+    }
+    
+    & #econ-axes {
+        opacity: 1;
+        stroke: var(--green5);
+        stroke-width: 3px;
+    }
+    
+    &.project-tile:hover {
 
-#econ.project-tile:hover path {
-    opacity: 1;
-    transition: opacity .1s ease-in;
-}
-
-#econ.project-tile:hover #econ-axes {
-    stroke: var(--green3);
-    transition: stroke .1s ease-in;
+        & path {
+            opacity: 1;
+            transition: opacity .1s ease-in;
+        }
+        
+        & #econ-axes {
+            stroke: var(--green3);
+            transition: stroke .1s ease-in;
+        }
+    }
 }
 
 /* Missing Migrants */
 
-#mmp .globe {
-    opacity: .5;
-    fill: var(--blue6);
-    stroke: none;
-    stroke-width: 0;
+.mmp-icon {
+
+    & .globe {
+        opacity: .5;
+        fill: var(--blue6);
+        stroke: none;
+        stroke-width: 0;
+    }
+
+    & .land {
+        fill: var(--green6);
+    }
+    
+    & .spike {
+        fill: var(--red2);
+        fill-opacity: 0.6;
+        transition: opacity 350ms;
+
+        &.hide {
+            opacity: 0;
+        }
+    }
 }
 
-#mmp .country {
-    fill: var(--green6);
+#mmp.project-tile:hover, .title-block .mmp-icon {
+
+    .spike {
+        fill-opacity: 0.85;
+    }
+
+    .globe {
+        opacity: .8;
+        transition: opacity .1s ease-in;
+    }
+    
+    .land {
+        fill: var(--green4);
+        transition: fill .1s ease-in;
+    }
 }
 
-#mmp.project-tile:hover .globe {
-    opacity: .8;
-    transition: opacity .1s ease-in;
-}
-
-#mmp.project-tile:hover .country {
-    fill: var(--green4);
-    transition: fill .1s ease-in;
-}
-
-#mmp .spike {
-    fill: var(--red2);
-    fill-opacity: 0.6;
-    transition: opacity 350ms;
-}
-
-#mmp .spike.hide {
-    opacity: 0;
-}
-
-#mmp.project-tile:hover .spike {
-    fill-opacity: 0.85;
-}
 
 /* MRIO */
 
@@ -202,43 +218,36 @@
     --mrio-base-opacity: .4;
     --mrio-highlight-opacity: .8;
     --mrio-duration: 4s;
-}
 
-#mrio .header {
-    opacity: var(--mrio-base-opacity);
-    fill: var(--gray4);
-}
+    & .header {
+        opacity: var(--mrio-base-opacity);
+        fill: var(--gray4);
+    }
+    
+    & .input {
+        fill: var(--blue3);
+        animation: input-highlight var(--mrio-duration) linear infinite;
+    }
+    
+    & .va {
+        fill: var(--red2);
+        animation: va-highlight var(--mrio-duration) linear infinite;
+    }
+    
+    & .final {
+        fill: var(--yellow2);
+        animation: final-highlight var(--mrio-duration) linear infinite;
+    }
+    
+    & .output {
+        fill: var(--green4);
+        animation: output-highlight var(--mrio-duration) linear infinite;
+    }
 
-#mrio .input {
-    fill: var(--blue3);
-    animation-name: input-highlight;
-    animation-duration: var(--mrio-duration);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-#mrio .va {
-    fill: var(--red2);
-    animation-name: va-highlight;
-    animation-duration: var(--mrio-duration);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-#mrio .final {
-    fill: var(--yellow2);
-    animation-name: final-highlight;
-    animation-duration: var(--mrio-duration);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-#mrio .output {
-    fill: var(--green4);
-    animation-name: output-highlight;
-    animation-duration: var(--mrio-duration);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+    &.project-tile:hover {
+        --mrio-base-opacity: .6;
+        --mrio-highlight-opacity: 1;
+    }
 }
 
 @keyframes input-highlight {
@@ -271,26 +280,21 @@
     100% { opacity: var(--mrio-base-opacity); }
 }
 
-#mrio.project-tile:hover {
-    --mrio-base-opacity: .6;
-    --mrio-highlight-opacity: 1;
-}
-
 /* Snapshot */
 
-#snapshot img {
-    opacity: .7;
-    width: 120%;
-    height: auto;
-    animation-name: pan-vertically;
-    animation-duration: 10s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-}
+#snapshot {
+    
+    & img {
+        opacity: .7;
+        width: 120%;
+        height: auto;
+        animation: pan-vertically 10s ease-in-out infinite;
+    }
 
-#snapshot.project-tile:hover img {
-    opacity: .9;
-    transition: opacity .1s ease-in;
+    &.project-tile:hover img {
+        opacity: .9;
+        transition: opacity .1s ease-in;
+    }
 }
 
 @keyframes pan-vertically {
