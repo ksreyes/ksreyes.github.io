@@ -17,13 +17,29 @@ body {
 }
 
 h1 {
-    font-size: 1rem;
-    font-size: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 0.825rem + 1.5vw, 1.8rem);
+    font-weight: 600;
+
+    .hero-bio & {
+        font-weight: 700;
+        margin: 0;
+    }
+}
+
+h3 {
+    font-size: 0.9rem;
+    font-size: clamp(0.9rem, 0.8375rem + 0.25vw, 1rem);
     font-weight: 600;
 }
+
 ::selection {
     background: var(--yellow4);
   }
+
+strong {
+    font-weight: 700;
+}
 
 hr {
     width: 10rem;
@@ -54,7 +70,6 @@ a:hover {
     gap: 1rem;
     align-items: flex-end;
     background-color: var(--green2);
-    /* padding: 5px max(10vw, 40px); */
     padding: 5px 10vw;
 }
 
