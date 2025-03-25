@@ -15,7 +15,7 @@ export function mrio(container) {
     };
 
     const group = svg.append("g")
-        .attr("transform", `translate(${params.side/2 + params.gutter},${params.side/2 + params.gutter})`)
+        .attr("transform", `translate(${params.side/2 + params.gutter},${params.side/2 + params.gutter * 2})`)
 
     group.append("rect")
         .attr("class", "header")
