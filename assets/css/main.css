@@ -21,8 +21,9 @@ body {
 }
 
 h1 {
+    /* font-size: clamp(1.2rem, 0.825rem + 1.5vw, 1.8rem); */
     font-size: 1.2rem;
-    font-size: clamp(1.2rem, 0.825rem + 1.5vw, 1.8rem);
+    font-size: clamp(1.2rem, 0.6rem + 2.4vw, 1.8rem);
     font-weight: 600;
 
     .hero-bio & {
@@ -32,15 +33,17 @@ h1 {
 }
 
 h2 {
-    font-size: 1rem;
-    font-size: clamp(1rem, 0.825rem + 1.5vw, 1.5rem);
+    /* font-size: clamp(1rem, 0.825rem + 1.5vw, 1.5rem); */
+    font-size: 1.2rem;
+    font-size: clamp(1.2rem, 0.9rem + 1.2vw, 1.5rem);
     font-weight: 600;
     text-align: center;
 }
 
 h3 {
-    font-size: 0.9rem;
-    font-size: clamp(0.9rem, 0.8375rem + 0.25vw, 1rem);
+    /* font-size: clamp(0.9rem, 0.8375rem + 0.25vw, 1rem); */
+    font-size: 0.8rem;
+    font-size: clamp(0.8rem, 0.6rem + 0.8vw, 1rem);
     font-weight: 600;
 }
 
@@ -64,13 +67,18 @@ hr {
 
 a {
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--green3);
 }
 
 a:hover {
     color: var(--green4);
     transition: color .1s ease-in;
+}
+
+svg {
+    display: block;
+    width: 100%;
 }
 
 /*** Header bar ********************************/
