@@ -1,26 +1,17 @@
 import { popden } from "../icons/popden-icon.js";
-import { addFormsAnnotation, addLegendAnnotation } from "./annotations.js";
 import * as colors from "../colors.js";
-
-// Icon ///////////////////////////////////////////////////////////////////////
 
 d3.select(".page-icon").call(popden);
 
-// Dashboard //////////////////////////////////////////////////////////////////
+// Dashboard ////////////////////////////////////
 
 const params = { 
-    width: 450, 
+    width: 475, 
     height: 400, 
-    formLabelsHeight: 110,
-    legendWidth: 450,
-    legendHeight: 40,
     rMean: 5
 };
 params.rSD = params.rMean * .75;
 params.velocity = params.rMean * .80;
-
-d3.select("#particles-container .annotation.annotation-forms")
-    .call(addFormsAnnotation, params);
 
 const color = d3.scaleOrdinal()
     .domain([1, 2, 3, 4, 5])
@@ -39,31 +30,15 @@ const bbox = ([[x1, y1], [x2, y2]]) => [
     { from: { x: x2, y: y1 }, to: { x: x1, y: y1 } }
 ];
 
-// Render panels //////////////////////////////////////////////////////////////
+// Render panels ////////////////////////////////
 
-const panelLeft = d3.select("#particles-container .panel-left")
+const panelLeft = d3.select(".graphic-container .panel-left")
     .append("svg")
-        .attr("width", params.width)
-        .attr("height", params.height)
-        // .attr("width", 100%)
-        // .attr("height", params.height)
-        .attr("viewBox", [0, 0, params.width, params.height]);
+    .attr("viewBox", [0, 0, params.width, params.height]);
 
-const panelRight = d3.select("#particles-container .panel-right")
+const panelRight = d3.select(".graphic-container .panel-right")
     .append("svg")
-        .attr("width", params.width)
-        .attr("height", params.height)
-        .attr("viewBox", [0, 0, params.width, params.height]);
-
-panelLeft.append("rect")
-    .attr("class", "panel-bg")
-    .attr("width", params.width)
-    .attr("height", params.height);
-
-panelRight.append("rect")
-    .attr("class", "panel-bg")
-    .attr("width", params.width)
-    .attr("height", params.height);
+    .attr("viewBox", [0, 0, params.width, params.height]);
 
 Promise.all([
 
@@ -76,51 +51,56 @@ Promise.all([
     const densityOthers = density.filter(d => d.country !== "Philippines");
     
     // Forms
-    const formLeft = d3.select("#particles-container .form-left")
+    const formLeft = d3.select(".graphic-container .form-left")
         .call(addFormDropdown, densityManila)
-    const formRight = d3.select("#particles-container .form-right")
+    const formRight = d3.select(".graphic-container .form-right")
         .call(addFormDropdown, densityOthers)
 
     // Default values
     formLeft.select("option[value='Manila']").attr("selected", true);
     formRight.select("option[value='New York']").attr("selected", true);
-
+    
     // Update chart when form changes
     formLeft.select("select").on("input", renderLeft);
     formRight.select("select").on("input", renderRight);
     
     function renderLeft() {
-        let cityLeft = formLeft.select("select").property("value");
+
+        let city = formLeft.select("select").property("value");
+        let density = densityManila.filter(d => d.city == city)[0].density;
+        let stat = d3.format(",.2r")(density);
+
         panelLeft.selectAll("g").remove();
-        panelLeft.call(addParticles, densityManila, groupAssign, cityLeft);
+        panelLeft.call(addParticles, density, groupAssign, city);
+
+        d3.select(".statistic-left")
+            .style("opacity", 0)
+            .html(`<strong>${ stat }</strong> people/km²`)
+            .transition().duration(400)
+            .style("opacity", 1)
     };
 
     function renderRight() {
-        let cityRight = formRight.select("select").property("value");
+
+        let city = formRight.select("select").property("value");
+        let density = densityOthers.filter(d => d.city == city)[0].density;
+        let stat = d3.format(",.2r")(density);
+
         panelRight.selectAll("g").remove();
-        panelRight.call(addParticles, densityOthers, groupAssign, cityRight);
+        panelRight.call(addParticles, density, groupAssign, city);
+
+        d3.select(".statistic-right")
+            .style("opacity", 0)
+            .html(`<strong>${ stat }</strong> people/km²`)
+            .transition().duration(400)
+            .style("opacity", 1);
     };
 
     renderLeft();
     renderRight();
-})
+});
 
-
-// Legend /////////////////////////////////////////////////////////////////////
-
-const legend = d3.select("#particles-container .legend")
-    .append("svg")
-        .attr("width", params.legendWidth)
-        .attr("height", params.legendHeight)
-        .attr("viewBox", [0, 0, params.legendWidth, params.legendHeight])
-
-legend.call(addLegend);
-
-d3.select("#particles-container .annotation.annotation-legend")
-    .call(addLegendAnnotation, params);
-
-
-// Functions //////////////////////////////////////////////////////////////////
+// Functions ////////////////////////////////////
 
 function addFormDropdown(container, data) {
   
@@ -142,12 +122,11 @@ function addFormDropdown(container, data) {
     return container.node();
 };
 
-function genpoints(data, assign, city) {
+function genpoints(density, assign, city) {
 
     // Function to generate particles for a given city
 
-    const dataCity = data.filter(d => d.city == city);
-    const density = Math.round(dataCity[0].density / 100);
+    const densityRound = Math.round(density / 100);
     const groupAssignCity = assign.filter(d => d.city === city);
 
     const counts = groupAssignCity.map(row => row.points_ingroup);
@@ -157,7 +136,7 @@ function genpoints(data, assign, city) {
     );
     
     const points = Array.from(
-        { length: density },
+        { length: densityRound },
         (_, i) => ({
             x: d3.randomUniform((params.width * .15), (params.width * .85))(),
             y: d3.randomUniform(params.height * .15, params.height * .85)(),
@@ -168,30 +147,17 @@ function genpoints(data, assign, city) {
         })
     );
 
-    console.log("dataCity.density: " + dataCity.density);
-
     return points;
 }
 
-function addParticles(container, data, assign, city) {
+function addParticles(container, density, assign, city) {
 
     // Function to generate particles chart
 
-    // Read data
-    const dataCity = data.filter(d => d.city == city);
-    const nodes = genpoints(data, assign, city).map(Object.create);
+    const nodes = genpoints(density, assign, city).map(Object.create);
 
     const panel = container.append("g");
-
-    // Bottom label
-    const densityStat = d3.format(",.2r")(dataCity.density);
-    panel.append("text")
-        .attr("id", "chart-text")
-        .attr("x", params.width / 2)
-        .attr("y", params.height * 1.075)
-        .attr("text-anchor", "middle")
-        .text(`${ densityStat } people/km²`);
-
+;
     // Draw particles
     const node = panel.append("g")
         .selectAll("circle")
@@ -210,48 +176,9 @@ function addParticles(container, data, assign, city) {
             .surfaces(bbox([[0, 0], [params.width, params.height]]))
             .oneWay(true)
             .radius(d => d.r + 1))
-        .force('limit', d3.forceLimit()
+        .force("limit", d3.forceLimit()
             .x0(0).x1(params.width).y0(0).y1(params.height))
         .alphaDecay(0)
         .velocityDecay(0)
         .on("tick", () => { node.attr("cx", d => d.x).attr("cy", d => d.y) });
 }
-
-function addLegend(container) {
-    
-    const rLegend = .5;
-    
-    const native = container.append("g")
-        .attr("transform", "translate(5, 20)")
-    
-    native.append("circle")
-        .attr("cx", rLegend + "rem")
-        .attr("cy", ".5rem")
-        .attr("fill", color(1))
-        .attr("r", rLegend + "rem");
-
-    native.append("text")
-        .attr("x", (rLegend * 3) + "rem")
-        .attr("y", ".85rem")
-        .attr("text-anchor", "left")
-        .text("Native ancestors");
-
-    const foreign = container.append("g")
-        .attr("transform", "translate(200, 20)")
-
-    foreign.append("g")
-        .selectAll("circle")
-        .data([1, 2, 3, 4])
-        .join("circle")
-        .attr("cx", d => (rLegend + (d - 1) * rLegend * 3) + "rem")
-        .attr("cy", ".5rem")
-        .attr("fill", d => color(d + 1))
-        .attr("r", rLegend + "rem");
-
-    foreign.append("text")
-        .attr("x", (rLegend * 3 * 4) + "rem")
-        .attr("y", ".85rem")
-        .attr("text-anchor", "left")
-        .text("Migrant ancestors");
-};
-

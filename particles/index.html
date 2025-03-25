@@ -41,13 +41,14 @@
 
             </section>
 
-            <section class="breakout">
+            <section class="breakout" id="particles-container">
 
-                <div class="screen-warning">Best viewed on desktop screens.</div>
-                
-                <div id="particles-container" class="graphic-container">
+                <div class="graphic-container">
                     
-                    <div class="annotation annotation-forms"></div>
+                    <div class="annot-forms-container">
+                        <div class="annot-left"></div>
+                        <div class="annot-right"></div>
+                    </div>
                     
                     <div class="forms">
                         <div class="form form-left"></div>
@@ -59,9 +60,28 @@
                         <div class="panel panel-left"></div>
                         <div class="panel panel-right"></div>
                     </div>
+                    <div class="statistic">
+                        <div class="statistic-left"></div>
+                        <div class="statistic-right"></div>
+                    </div>
                     
-                    <div class="legend"></div>
-                    <div class="annotation annotation-legend"></div>
+                    <div class="legend">
+                        <div class="key-item">
+                            <div class="key key-1"></div>
+                            <div class="label">Native ancestors</div>
+                        </div>
+                        <div class="key-item">
+                            <div class="key key-2"></div>
+                            <div class="key key-3"></div>
+                            <div class="key key-4"></div>
+                            <div class="key key-5"></div>
+                            <div class="label">Migrant ancestors</div>
+                        </div>
+                    </div>
+
+                    <div class="annot-legend-container">
+                        <div class="annot-legend"></div>
+                    </div>
                     
                 </div>
 
@@ -89,6 +109,7 @@
     </footer>
     
     <script type="module" src="../assets/js/particles/main.js"></script>
+    <script type="module" src="../assets/js/particles/annotations.js"></script>
 
 </body>
 </html>
