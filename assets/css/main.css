@@ -138,7 +138,7 @@ svg {
 
 .content-grid {
     --padding-inline: 1rem;
-    --content-max-width: 800px;
+    --content-max-width: 700px;
     --breakout-max-width: 1000px;
     --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
 
@@ -193,6 +193,11 @@ svg {
 
 .emph {
     color: var(--green3);
+    font-weight: 600;
+}
+
+h1 .emph {
+    color: var(--red1);
 }
 
 .hero-buttons {
@@ -220,6 +225,29 @@ svg {
     transform: scale(1.05);
     background: var(--green3);
     transition: background .1s ease-in, transform .1s ease-in;
+}
+
+
+.p-mark {
+    position: relative;
+    overflow: visible;
+    /* border: .5px solid blue; */
+    
+    & svg {
+        display: inline;
+        position: absolute;
+        left: 0;
+        top: 0;
+        /* border: .5px solid red; */
+
+        & path {
+            shape-rendering: geometricPrecision;
+            fill: none;
+            stroke: var(--red1);
+            stroke-width: 1.5px;
+            stroke-linecap: round;
+        }
+    }
 }
 
 /*** Footer ************************************/
