@@ -21,12 +21,12 @@ body {
     color: hsl(0, 0%, 20%);
     padding-top: 8rem;
 
-    @media (width <= 430px) and (orientation: portrait) {
+    @media (width <= 440px) and (orientation: portrait) {
 
         padding-top: 5rem;
 
         &.home {
-            padding-top: 3rem;
+            padding-top: 2.75rem;
         }
     }
 }
@@ -116,7 +116,7 @@ svg {
     gap: 1rem;
     align-items: flex-end;
 
-    @media (width <= 430px) and (orientation: portrait) {
+    @media (width <= 440px) and (orientation: portrait) {
         flex-direction: column;
         gap: 0;
         align-items: center;
@@ -148,7 +148,7 @@ svg {
 /*** Body **************************************/
 
 .content-grid {
-    --padding-inline: 1rem;
+    --padding-inline: 2rem;
     --content-max-width: 700px;
     --breakout-max-width: 1000px;
     --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
@@ -204,10 +204,11 @@ svg {
         }
     }
 
-    @media (width <= 430px) and (orientation: portrait) {
+    @media (width <= 440px) and (orientation: portrait) {
 
         grid-column: full-width !important;
         flex-direction: column;
+        align-items: center;
         gap: 0;
         text-align: center;
         margin-left: 0;
@@ -215,7 +216,7 @@ svg {
         & .hero-pic img {
             width: auto;
             height: 80vh;
-            height: calc(100svh - 130px);
+            height: max(calc(100svh - 125px), 80vh);
         }
 
         & .hero-buttons {
