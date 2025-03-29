@@ -148,6 +148,22 @@
 
 #econ {
 
+    .icon-bg {
+        position: absolute;
+        opacity: .75;
+        z-index: -1;
+        width: 120px;
+        height: 110px;
+        background: white;
+        border: 1.5px solid var(--gray7);
+        border-radius: 20px;
+    }
+
+    .title-block & {
+        width: 95px;
+        height: 85px;
+    }
+
     & path {
         opacity: .5;
     }
