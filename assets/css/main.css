@@ -216,7 +216,7 @@ svg {
         & .hero-pic img {
             width: auto;
             height: 80vh;
-            height: max(calc(100svh - 125px), 80vh);
+            height: max(calc(100svh - 45px), 80vh);
         }
 
         & .hero-buttons {
