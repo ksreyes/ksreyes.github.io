@@ -325,6 +325,7 @@
         & .legend-spike-key {
             display: flex;
             align-items: center;
+            justify-self: flex-start;
         }
     }
 
