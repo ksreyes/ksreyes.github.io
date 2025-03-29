@@ -109,7 +109,7 @@ export function econ(container) {
         
         panel.append("g")
             .append("path")
-            .attr("id", "econ-axes")
+            .attr("class", "econ-axes")
             .attr("d", `
                 M1.5,0
                 V1.5,${ dim.height - margin.top - margin.bottom - 1.5}

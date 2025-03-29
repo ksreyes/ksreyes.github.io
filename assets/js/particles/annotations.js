@@ -125,7 +125,7 @@ function addArrow(container) {
             .attr("markerHeight", 5)
             .attr("orient", "auto")
         .append("path")
-            .attr("d", "M0,1 L9,5 L0,9")
+            .attr("d", "M0,1 L9,5 L0,9");
 
     return container.node();
 };

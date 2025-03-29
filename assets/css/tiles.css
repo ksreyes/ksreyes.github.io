@@ -12,7 +12,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
+    gap: 1em;
 }
 
 /* Tile template */
@@ -29,7 +29,7 @@
     text-align: center;
     height: 100%;
     color: var(--green2);
-    font-weight: normal;
+    /* font-weight: normal; */
     padding: .8rem .6rem 1rem .6rem;
 
     & .project-tile-desc {
@@ -59,9 +59,9 @@
 }
 
 .project-tile-title {
-    font-size: 1.2rem;
+    font-size: 1.2em;
     font-weight: 500;
-    line-height: 1.5rem;
+    line-height: 1.2;
     text-align: center;
     text-wrap: balance;
     margin: .5rem 0;
@@ -71,6 +71,10 @@
     font-size: .8em;
     text-wrap: balance;
     margin: 0;
+
+    @media (width <= 425px) {
+        font-size: 1em;
+    }
 }
 
 /*** Hover effects *****************************/
@@ -148,20 +152,20 @@
         opacity: .5;
     }
     
-    & #econ-axes {
+    & .econ-axes {
         opacity: 1;
         stroke: var(--green5);
         stroke-width: 3px;
     }
     
-    &.project-tile:hover {
+    &.project-tile:hover, &.page-icon {
 
         & path {
             opacity: 1;
             transition: opacity .1s ease-in;
         }
         
-        & #econ-axes {
+        & .econ-axes {
             stroke: var(--green3);
             transition: stroke .1s ease-in;
         }
