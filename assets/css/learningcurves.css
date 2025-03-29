@@ -1,0 +1,184 @@
+.econ-diagram {
+
+    --width-axis: 2px;
+    --width-bg: 8px;
+    --width-curve: 5px;
+    --width-curve-hovered: 7px;
+    --width-form-label: 120px;
+    --width-form-display: 40px;
+    --width-form-input: 140px;
+
+    --color-axis: #000000;
+    /* --color-bg: #EDF8FF; */
+    --color-bg: var(--green9);
+    /* --color-bg-stroke: #E0EDFB; */
+    --color-bg-stroke: var(--green7);
+    --color-dashed: #999999;
+    --color-tick: #000000;
+    --color-label: #000000;
+    --color-toggle: #84b0c5;
+
+    --font-size: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    & .forms {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: .5rem;
+
+        width: 100%;
+
+        & > * {
+            flex-basis: 40%;
+        }
+
+        & .diagram-form {
+            display: flex;
+            flex-direction: row;
+
+            & .diagram-form-label {
+                width: var(--width-form-label);
+                color: var(--green3);
+            }
+
+            & .diagram-form-inputs {
+                
+                display: flex;
+                align-items: center;
+                width: 100%;
+                max-width: 100%;
+
+                & span {
+                    width: var(--width-form-display);
+                    flex-shrink: 1.5;
+                    font-weight: 700;
+                    align-text: right;
+                    /* color: var(--green3); */
+                }
+
+                & input[type=range] {
+                    width: var(--width-form-input);
+                }
+            }
+
+        }
+    }
+
+    & .diagram {
+        width: 570px;
+        max-width: 100%;
+        position: relative;
+    }
+
+    & .bg {
+        fill: var(--color-bg);
+        stroke: var(--color-bg-stroke);
+        stroke-width: var(--width-bg);
+    }
+
+    & svg {
+        position: relative;
+    }
+
+    & .curve {
+        fill: none;
+        stroke-width: var(--width-curve);
+
+        &.hovered {
+            stroke-width: var(--width-curve-hovered);
+        }
+    }
+
+    & .curve-label {
+        fill: var(--color-label);
+        font-size: var(--font-size);
+        font-weight: bold;
+        dominant-baseline: middle;
+        transition: opacity .1s ease-in-out;
+
+        &.hide-label {
+            opacity: 0;
+        }
+    }
+
+    & .clip {
+        fill: white;
+    }
+
+    & .area {
+        fill: #7fc6a4;
+        opacity: .25;
+
+        &.hovered {
+            opacity: .5;
+        }
+    }
+
+    & .axis {
+
+        & .axis-line {
+            fill: none;
+            stroke: var(--color-axis);
+            stroke-width: var(--width-axis);
+        }
+
+        & .axis-text {
+            fill: var(--color-axis);
+            font-size: var(--font-size);
+            
+            &.axis-text-x {
+                text-anchor: start;
+                dominant-baseline: middle;
+            }
+
+            &.axis-text-y {
+                text-anchor: middle;
+            }
+        }
+    }
+
+    & .guide {
+
+        & .dashed-line {
+            fill: none;
+            stroke: var(--color-dashed);
+            stroke-dasharray: 4 4;
+        }
+
+        & .tick {
+            fill: var(--color-tick);
+            font-size: var(--font-size);
+            
+            &.tick-x { 
+                text-anchor: middle;
+                dominant-baseline: hanging;
+            }
+
+            &.tick-y { 
+                text-anchor: end;
+                dominant-baseline: middle;
+            }
+        }
+    }
+
+    & .toggle-labels {
+        position: absolute;
+        top: 5%;
+        right: 3%;
+
+        & .toggle-checkbox {
+            margin: 0 .35rem .15rem 0;
+            vertical-align: middle;
+        }
+    
+        & .toggle-label {
+            color: var(--green4);
+        }
+    }
+}
