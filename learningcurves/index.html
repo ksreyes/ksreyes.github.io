@@ -60,7 +60,11 @@
                 
                 <p>You don't have to worry so much about the math, but pay attention to the fact that total cost is composed of a fixed cost (does not change with <span class="math var">q</span> ) and a variable cost (varies with <span class="math var">q</span> ). This cost function is plotted below.</p>
 
-                <div class="econ-diagram" id="fig-01"></div>
+                <div class="econ-diagram" id="fig-01">
+                    <div class="chart-caption">
+                        Figure 1. The cost function gives total costs for every level of output.
+                    </div>
+                </div>
 
                 <p>Notice that the <strong>cost curve</strong> has a vague S shape. This captures the idea that at a small enough scale, costs don't rise all that quickly with output. Imagine you started a food truck business. Your initial outlays for the truck, the stove, the ingredients, and so on will comprise the bulk of your total costs, and any extra burger, taco, or kebab you produce won't raise this by a lot. As you expand however, you start hitting the limits of your capacity and each extra unit of output becomes more and more expensive to produce. Thus we see the cost curve growing steeper and steeper.</p>
 
@@ -69,9 +73,81 @@
                 <p>Our goal as the firm is to figure out what the optimal level of output is from a profit-maximizing standpoint. To do this, we'll need to look at things from a per unit perspective. The charts below introduce three useful curves: the average cost curve, the average variable cost curve, and the marginal cost curve.</p>
 
                 <div class="econ-diagram" id="fig-02"></div>
+
+                <p>The average cost or AC curve simply plots total costs divided by output. It is U-shaped, shooting up at both very low and very high output levels. In fact, in the presence of fixed costs, AC goes to infinity as output approaches zero. Notice that this no longer happens if we set fixed costs to zero.</p>
+
+                <p>The second panel plots the average variable cost or AVC curve. This is just the AC curve minus the fixed costs component. The AVC curve is also U-shaped, but it doesn’t shoot to infinity when output is zero. As output gets larger and larger, the share of fixed costs in total costs gets smaller and smaller; thus we see the AC and AVC curves converging. Setting fixed costs to zero merges the AC and AVC curves, which is to say, the AC and AVC curves are only distinct quantities in the short run.</p>
+                
+                <p>The marginal cost or MC curve is on the third panel. Of the three, it is probably the trickiest to grasp, but as marginalist reasoning abounds in economics, it’s worthwhile to really think it through. The MC curve plots the incremental change in total cost given one additional unit of output. It is not an average quantity. It is also U-shaped, but it is a much thinner U than either AC or AVC. This is because it tracks incremental change and is not bogged down by the running tally of costs like AC and AVC are. The slope of the MC curve goes from downward to upward at the precise moment the total cost curve turns from flattening to steepening.</p>
+                
+                <p>Here’s a useful tip: every time two curves intersect in economics, make note of it. More often than not, something special is happening. In this case, notice how the MC curve crosses AVC and AC at the point when they are at their minimum. In other words, the intersection with MC marks the point where they go from downward-sloping to upward-sloping. That is no coincidence. The reason is that as long as MC is below AC/AVC, then the incremental change in costs is lower than the running average, which pulls the average down. Conversely, if MC is above AC/AVC, then it is pulling the average up. By analogy, suppose your average grade from three exams is 80. If your fourth exam is lower than 80, then it will pull your average down, but if it is higher than 80, it will pull your average up. The same principle is at work in our cost curves.</p>
     
             </section>
+
+            <section>
+
+                <h3>Deriving the supply curve</h3>
+
+                <p>With a good understanding of AC, AVC, and MC, let’s move on to how they’re used to get the firm’s optimal output level. We will be assuming that the market is perfectly competitive, which means that the firm is a price-taker. Later we will explore what happens when this assumption breaks down. For now, let’s say the price the firm is facing is $17. Profits are computed straightforwardly as revenues (price times quantity) minus costs; in the per unit panel, this is represented by the shaded rectangle. Move the output slider around until you find the profit-maximizing level.</p>
+
+                <div class="econ-diagram" id="fig-03"></div>
+
+                <p>We see that an output of about 59 units maximizes profits.1 Notice anything interesting? This level of 
+                just so happens to be the point where the price line intersects the MC curve!  This is a key insight in economics. It says that at the optimum, the last additional unit of output you produce should yield you as much revenue as the costs it incurs. This is best understood by considering the alternatives. If we’ve chosen an output level such that MC is below price, then producing one more unit should give us more revenue than costs, and thus increase our profits. Conversely, if MC is above price, then cutting back production by one unit reduces costs more than it reduces revenues, which again increases profits. The state of optimality is reached when price is equal to MC, or, stated more generally, when marginal revenue is equal to marginal costs.</p>
+
+                <p>Well, a small caveat: notice that the price line actually intersects MC on two points, first in its downward-sloping region and second in its upward-sloping region. Setting output where price crosses MC at its downward-sloping region actually minimizes profits. Naturally, if MC is below price and is falling, then we’d want to keep expanding output. Let’s clarify then that the optimal output level is where price meets the MC curve in its upward-sloping region.</p>
+
+                <p>Does our rule still work when the price is so low that profits are negative no matter what output level we choose? Let’s investigate. The chart below sets the price at $10.</p>
+
+                <div class="econ-diagram" id="fig-04"></div>
+
+                <p>This time, the condition gives us an output level of about 51 and profits of –$99. If my profits are going to be negative, why don’t I just produce zero and call it a day? Well, if you tried to set , you’ll see that it yields profits of –$250, which is more negative than at the optimal level. The number 250, of course, is our fixed costs, and the insight here is that since we have to pay for fixed costs anyway, it’s better to produce something rather than nothing, even if we never do earn positive profits.</p>
+                
+                <p>The price can be so low, however, that it does make more sense to quit production altogether. As an exercise, use the chart below to try and find prices for which the optimal output level is zero. Formulate a rule for what these prices must be.</p>
+
+                <div class="econ-diagram" id="fig-05"></div>
+
+                <p>The rule is that any price below the AVC curve makes zero output optimal. In these cases, each unit of output you produce cannot even pay for itself, much less your fixed costs. It is better for you to shut your business down; the point where MC and AVC intersect is known as the shutdown point.</p>
+
+                <p>To recap what we have established:</p>
+
+                <ol>
+                    <li>Given a price, the firm will choose the output level that corresponds to where the price line intersects with the upward-sloping region of the MC curve.</li>
+                    <li>Negative profits can still be optimal if the price is enough to pay for average variable costs.</li>
+                    <li>The firm will not produce anything for any price below the AVC curve.</li>
+                </ol>
+                    
+                <p>These conditions trace out our firm’s supply curve, which gives its optimal output decision for every conceivable price level. In the chart below, move the price slider around to see how output changes. You can also vary fixed costs to see how this does not affect the firm’s decision, though it does affect realized profits.</p>
+
+                <div class="econ-diagram" id="fig-06"></div>
+
+                <p>In the long run, fixed costs reach zero and the AC and AVC curves converge. This would imply that profits cannot be negative in the long run — firms are either participating in the market with positive profits or else have shut down their business (use the chart above to verify). This actually extends to a broader and more surprising prediction: in the long run, profits can neither be positive nor negative. They must always be zero!</p>
+
+            </section>
+
+            <section>
+
+                <h3>In the room the firms come and go</h3>
+
+                <p>This prediction stems from the assumption that without the hindrance of fixed costs, firms can freely enter and exit the market. Any market where participating firms are enjoying positive profits will attract the entry of more firms, which increases supply and drives down the price. Firms will keep entering until it makes no more economic sense to do so, which is the point when prevailing profits have reached zero. Likewise, firms will exit markets where profits are negative, reducing supply and raising prices until profits are brought to zero. The chart below depicts the long-run equilibrium for a firm in our perfectly competitive market.</p>
+
+                <div class="econ-diagram" id="fig-07"></div>
+
+                <p>It’s important to clarify a couple of things with regard to interpretation. “Costs” here are understood broadly, meaning they include the wages that businessowners pay to themselves. It’s better to think of “zero” profits in a normalized sense, as in firms are not making any outsized profits relative to what firms on average can make.</p>
+
+                <p>Second, this result only applies to perfectly competitive markets, which are idealized scenarios that do not describe anything found in reality. The key assumption here is that firms are numerous enough and small enough that their actions have no influence on prevailing prices. But this seldom holds. Let’s now turn to the opposite extreme, the case where the market is dominated by just a single seller.</p>
+
+            </section>
             
+            <section>
+
+                <h3>The only game in town</h3>
+
+                <p>Facing no competitors, a monopoly exercises full control over its price. Of course, this doesn’t mean it can force people to buy its product, so there’s still an optimality decision to be made. Given its cost structure and the demand it faces, how much and at what price should it produce so as to maximize profits?</p>
+
+                <p>Let’s first look at how price-setting power can be included in our model. In the chart below, the first panel shows what we have been working with. This actually reflects a special case where the demand curve, the MR curve, and the price line all coincide, such that no matter what output level the firm operates at, demand, marginal revenue, and price will all remain the same.</p>
+
+            </section>
 
             </section>
     

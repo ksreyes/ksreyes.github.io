@@ -1,13 +1,50 @@
-// Forms
+// Parameters ///////////////////////////////////
+
 export const max = { fc: 500, q: 100, p: 27 }
-  
-// const bgColor = "#EDF8FF";
-export const blue = ({ base: "#4889ab", dull: "#A2C4D2", baseSelect: "#0C6291", dullSelect: "#669DB8"});
-export const red = ({ base: "#C85B89", dull: "#E29FBC", baseSelect: "#B13D70", dullSelect: "#D1729A" });
-export const green = ({ base: "#71B795", dull: "#B4D7C6", baseSelect: "#418462", dullSelect: "#73AA8E" });
-export const gray = ({ base: "#DDDDDD", dull: "#DDDDDD", baseSelect: "#D0D0D0", dullSelect: "##D0D0D0" });
-// const dashed = "#999999";
-// const strokeWidth = 5;
+
+export const blue = { 
+    base: "#4889ab", 
+    dull: "#A2C4D2", 
+    baseSelect: "#0C6291", 
+    dullSelect: "#669DB8"
+};
+
+export const red = { 
+    base: "#C85B89", 
+    dull: "#E29FBC", 
+    baseSelect: "#B13D70", 
+    dullSelect: "#D1729A" 
+};
+
+export const green = { 
+    base: "#71B795", 
+    dull: "#B4D7C6", 
+    baseSelect: "#418462", 
+    dullSelect: "#73AA8E" 
+};
+
+export const gray = { 
+    base: "#DDDDDD", 
+    dull: "#DDDDDD", 
+    baseSelect: "#D0D0D0", 
+    dullSelect: "##D0D0D0" 
+};
+
+export const margin = { 
+    top: 50, 
+    right: 100, 
+    bottom: 40, 
+    left: 70, 
+    between: 60 
+};
+
+export const dim = { 
+    width: 400, 
+    panelHeight: 280 
+};
+dim.height = dim.panelHeight * 2 + margin.between;
+
+// Functions ////////////////////////////////////
 
 const constant = {
     a: 0.006,
@@ -72,122 +109,109 @@ export function profitMonoFxn({ q, fc } = {}) {
     return demandMonoFxn({ q }) * q - costFxn({ q, fc });
 }
 
-export const cost = ({ 
+// Function info ////////////////////////////////
+
+export const cost = { 
     fxn: costFxn, 
     label: "Cost", 
     id: "cost-curve", 
     scheme: red 
-});
+};
 
-const ac = ({ 
+export const ac = ({ 
     fxn: acFxn, 
     label: "Average cost", 
     id: "ac-curve", 
     scheme: blue 
 });
 
-const avc = ({ 
+export const avc = ({ 
     fxn: avcFxn, 
     label: "Average variable cost", 
     id: "avc-curve", 
     scheme: blue 
 });
 
-const mc = ({ 
+export const mc = ({ 
     fxn: mcFxn, 
     label: "Marginal cost", 
     id: "mc-curve", 
     scheme: blue 
 });
 
-const profit = ({ 
+export const profit = ({ 
     fxn: profitFxn, 
     label: "Profit", 
     id: "profit-curve", 
     scheme: red 
 });
 
-const price = ({ 
+export const price = ({ 
     fxn: mrFxn, 
     label: "Price", 
     id: "mr-curve", 
     scheme: green 
 });
 
-const mr = ({ 
+export const mr = ({ 
     fxn: mrFxn, 
     label: "Marginal revenue", 
     id: "mr-curve", 
     scheme: green 
 });
 
-const supply = ({ 
+export const supply = ({ 
     fxn: supplyFxn, 
     label: "Supply", 
     id: "supply-curve", 
     scheme: blue 
 });
   
-const demandMono = ({ 
+export const demandMono = ({ 
     fxn: demandMonoFxn, 
     label: "Demand", 
     id: "demand-mono-curve", 
     scheme: green 
 });
 
-const mrMono = ({ 
+export const mrMono = ({ 
     fxn: mrMonoFxn, 
     label: "Marginal revenue", 
     id: "mr-mono-curve", 
     scheme: green 
 });
 
-const profitMono = ({ 
+export const profitMono = ({ 
     fxn: profitMonoFxn, 
     label: "Profit", 
     id: "profit-mono-curve", 
     scheme: red 
 });
   
-const demandMonoComp = ({ 
+export const demandMonoComp = ({ 
     fxn: null, 
     label: "Demand", 
     id: "demand-monocomp-curve", 
     scheme: green 
 });
 
-const mrMonoComp = ({ 
+export const mrMonoComp = ({ 
     fxn: null, 
     label: "Marginal revenue", 
     id: "mr-monocomp-curve", 
     scheme: green 
 });
 
-const profitMonoComp = ({ 
+export const profitMonoComp = ({ 
     fxn: null, 
     label: "Profit", 
     id: "profit-monocomp-curve", 
     scheme: red 
 });
-  
-export const margin = { top: 50, right: 100, bottom: 40, left: 70, between: 60 };
-export const dim = { width: 400, panelHeight: 280 };
-dim.height = dim.panelHeight * 2 + margin.between;
 
+// Chart elements ///////////////////////////////
 
 export const tooltip = d3.select(".tooltip");
-// tooltip = d3.select("body")
-//     .append("div")
-//     .attr("class", "toolTip")
-//     .style("display", "none")
-//     .style("position", "absolute")
-//     .style("width", 100)
-//     .style("height", 20)
-//     .style("background", "#f7f7f7")
-//     .style("border", "1px solid #cecece")
-//     .style("opacity", .9)
-//     .style("padding", ".2em .45em")
-//     .style("font-size", ".85rem");
   
 export const line = d3.line().curve(d3.curveBasis);
   
@@ -205,7 +229,7 @@ export function data(fxn, params, yScaler) {
         return [x, y];
     });
 }
-  
+
 export function dataMax(fxn, params, yScaler) {
 
     const q = max.q, p = params.p, fc = params.fc, c = params.c;

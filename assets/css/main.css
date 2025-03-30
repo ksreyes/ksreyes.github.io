@@ -33,7 +33,12 @@ body {
 
 ul {
     margin: .5em 0;
-    padding: 0 0 0 1.25em;
+    padding-left: 1.25em;
+}
+
+ol {
+    margin: .5em 0;
+    padding-left: 2em;
 }
 
 li {
