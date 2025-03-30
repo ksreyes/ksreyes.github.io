@@ -4,8 +4,8 @@
     --width-bg: 8px;
     --width-curve: 5px;
     --width-curve-hovered: 7px;
-    --width-form-label: 120px;
-    --width-form-display: 40px;
+    --width-form-label: 15ch;
+    --width-form-display: 4ch;
     --width-form-input: 150px;
 
     --color-axis: #000000;
@@ -54,12 +54,12 @@
                 width: 100%;
                 max-width: 100%;
 
-                & span {
+                & div {
                     width: var(--width-form-display);
                     flex-shrink: 1.5;
                     font-weight: 700;
-                    align-text: right;
-                    /* color: var(--green3); */
+                    text-align: right;
+                    padding-right: .5em;
                 }
 
                 & input[type=range] {
