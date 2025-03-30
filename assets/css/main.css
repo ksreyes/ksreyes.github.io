@@ -85,6 +85,13 @@ emph {
     font-style: italic;
 }
 
+sup {
+    position: relative;
+    font-size: 0.75em;
+    vertical-align: baseline;
+    line-height: 0;
+    top: -0.5em;
+}
 hr {
     width: 10rem;
     border-color: var(--green5);

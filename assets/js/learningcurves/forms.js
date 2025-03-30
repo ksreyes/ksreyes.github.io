@@ -1,9 +1,16 @@
 
-
-export function outputForm(container, id, label, minValue, maxValue, steps, defaultValue) {
+export function addForm(container, 
+                        id, 
+                        label, 
+                        minValue, 
+                        maxValue, 
+                        steps, 
+                        defaultValue,
+                        lock = false) {
 
     const form = container.append("form")
-        .attr("class", "diagram-form");
+        .attr("class", "diagram-form")
+        .attr("id", id);
     
     form.append("label")
         .attr("class", "diagram-form-label")
@@ -11,10 +18,11 @@ export function outputForm(container, id, label, minValue, maxValue, steps, defa
         .text(label);
     
     const inputs = form.append("div")
-        .attr("class", "diagram-form-inputs")
+        .attr("class", "diagram-form-inputs");
 
     const display = inputs.append("div")
-        .text(defaultValue);;
+        .attr("class", "display")
+        .text(defaultValue);
         
     const slider = inputs.append("input")
         .attr("type", "range")
@@ -25,9 +33,15 @@ export function outputForm(container, id, label, minValue, maxValue, steps, defa
         .attr("value", defaultValue)
         .attr("id", id);
 
-    slider.on("input", () => {
-        display.text(slider.property("value"));
-    });
+    slider
+        .on("input.display", () => {
+            display.text(slider.property("value"));
+        })
+        
+
+    if (lock) {
+        slider.attr("disabled", true);
+    }
     
     return container.node();
 }

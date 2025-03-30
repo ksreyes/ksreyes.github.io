@@ -40,17 +40,16 @@ export function addCurve(selection, id, fxnInfo, params, yScaler) {
                 .style("stroke", fxnInfo.scheme.baseSelect);
 
             d3.selectAll(`#${ fxnInfo.id }-${ id } .curve.dulled`)
-                // .transition().duration(50)
                 .classed("hovered", true)
                 .style("stroke", fxnInfo.scheme.dullSelect);
 
             util.tooltip
-                .style("left", event.pageX + 18 + "px")
-                .style("top", event.pageY + 18 + "px")
+                .style("left", event.pageX + 10 + "px")
+                .style("top", event.pageY + 10 + "px")
                 .style("display", "block")
                 .text(fxnInfo.label);
 
-            d3.select(event.target).style("cursor", "pointer");
+            // d3.select(event.target).style("cursor", "pointer");
         })
         .on("mouseleave", (event) => {
 
@@ -63,7 +62,7 @@ export function addCurve(selection, id, fxnInfo, params, yScaler) {
                 .style("stroke", fxnInfo.scheme.dull);
 
             util.tooltip.style("display", "none");
-            d3.select(event.target).style("cursor", "default");
+            // d3.select(event.target).style("cursor", "default");
         });
   
     return selection.node();
@@ -114,6 +113,11 @@ export function addCurveFull(selection,
 }
   
 export function addArea(selection, id, info, corners) {
+
+    if (corners.x1 === undefined) corners.x1 = 0;
+    if (corners.x2 === undefined) corners.x2 = 0;
+    if (corners.y1 === undefined) corners.y1 = 0;
+    if (corners.y2 === undefined) corners.y2 = 0;
     
     const area = selection.append("path")
         .attr("id", `area-${ info.id }-${ id }`)

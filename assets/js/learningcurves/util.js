@@ -109,6 +109,33 @@ export function profitMonoFxn({ q, fc } = {}) {
     return demandMonoFxn({ q }) * q - costFxn({ q, fc });
 }
 
+export function qStar(p) {
+
+    const discriminant = Math.pow(constant.b, 2) - 3 * constant.a * (constant.c - p);
+    
+    if (discriminant < 0) {
+        return 0;
+    }
+
+    const sqrtTerm = Math.sqrt(discriminant);
+    const q1 = (constant.b + sqrtTerm) / (3 * constant.a);
+    const q2 = (constant.b - sqrtTerm) / (3 * constant.a);
+
+    return Math.round(Math.max(q1, q2));
+}
+
+export function qShutDown() {
+    return Math.floor(constant.b / (constant.a * 2));
+}
+
+export function q(p) {
+    if (p < avcFxn({ q: qShutDown() })) {
+        return 0;
+    } else {
+        return Math.floor((1.12 + Math.pow(.072 * p - .1856, .5)) / .036);
+    }
+};
+
 // Function info ////////////////////////////////
 
 export const cost = { 

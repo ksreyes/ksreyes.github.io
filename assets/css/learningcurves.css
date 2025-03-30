@@ -19,6 +19,8 @@
     --color-tabtext: var(--green3);
     --color-tab-active: var(--green3);
     --color-tabtext-active: var(--green9);
+    --color-area-green: #7fc6a4;
+    --color-area-red: #f697bb;
 
     --font-size: 1rem;
 
@@ -26,6 +28,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    padding: 1em 0;
 
     & .tabset {
         display: flex;
@@ -82,7 +85,7 @@
                 width: 100%;
                 max-width: 100%;
 
-                & div {
+                & .display {
                     width: var(--width-form-display);
                     flex-shrink: 1.5;
                     font-weight: 700;
@@ -117,7 +120,7 @@
     & .curve {
         fill: none;
         stroke-width: var(--width-curve);
-        stroke-linecap:butt, round
+        cursor: pointer;
 
         &.hovered {
             stroke-width: var(--width-curve-hovered);
@@ -141,8 +144,12 @@
     }
 
     & .area {
-        fill: #7fc6a4;
+        fill: var(--color-area-green);
         opacity: .25;
+
+        &.invert {
+            fill: var(--color-area-red);
+        }
 
         &.hovered {
             opacity: .5;
@@ -198,7 +205,7 @@
 
     & .toggle-labels {
         position: absolute;
-        top: 5%;
+        top: 1em;
         right: 3%;
 
         & .toggle-checkbox {
