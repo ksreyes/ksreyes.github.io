@@ -120,6 +120,7 @@
     & .curve {
         fill: none;
         stroke-width: var(--width-curve);
+        mix-blend-mode: darken;
         cursor: pointer;
 
         &.hovered {
@@ -194,11 +195,13 @@
             &.tick-x { 
                 text-anchor: middle;
                 dominant-baseline: hanging;
+                transform: translateY(10px);
             }
 
             &.tick-y { 
                 text-anchor: end;
                 dominant-baseline: middle;
+                transform: translateX(-10px);
             }
         }
     }

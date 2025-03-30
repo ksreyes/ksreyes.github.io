@@ -1,6 +1,6 @@
 // Parameters ///////////////////////////////////
 
-export const max = { fc: 500, q: 100, p: 27 }
+export const max = { fc: 500, q: 100, p: 27, c: 25 }
 
 export const blue = { 
     base: "#4889ab", 
@@ -101,6 +101,10 @@ export function demandMonoFxn({ q } = {}) {
     return 27 - (27 / 95) * q;
 }
 
+export function demandMonoFxnInv({ p } = {}) {
+    return Math.floor((27 - +p) / (27 / 95));
+}
+
 export function mrMonoFxn({q} = {}) {
     return 27 - 2 * (27 / 95) * q;
 }
@@ -135,6 +139,37 @@ export function q(p) {
         return Math.floor((1.12 + Math.pow(.072 * p - .1856, .5)) / .036);
     }
 };
+
+
+export function qMonoComp(c) {
+    const b = (54 / 95) - 1.12;
+    return Math.floor( (1/.036) * (-b + Math.pow( Math.pow(b, 2) - 1.44 + .072 * c, .5 ) ) )
+}
+
+export function demandMonoCompFxn({ q, c } = {}) {
+    return c - (27 / 95) * q;
+}
+
+export function mrMonoCompFxn({ q, c } = {}) {
+    return c - 2 * (27 / 95) * q;
+}
+
+export function profitMonoCompFxn({ q, fc, c } = {}) {
+    return Math.ceil(demandMonoCompFxn({ q, c }) * q - costFxn({ q, fc }));
+}
+
+export function pMonoComp({ q, c }) {
+    return demandMonoCompFxn({ q: qMonoComp({ c }), c });
+}
+
+export function demandMonoCompInvFxn({ dmd, c } = {}) {
+    return (95 / 27) * (c - dmd);
+}
+
+export function mrMonoCompInvFxn({ mr, c } = {}) {
+    return (95 / (27 * 2)) * (c - mr);
+}
+
 
 // Function info ////////////////////////////////
 

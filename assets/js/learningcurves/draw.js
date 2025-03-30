@@ -281,8 +281,7 @@ export function xGuides(selection, fxnInfo, params, yScaler, panels = 2) {
         .attr("class", "tick tick-x")
         .text(d3.format(",.0f")(params.q))
         .attr("x", util.xScaler(params.q))
-        .attr("y", util.dim.panelHeight * 2 + util.margin.between)
-        .attr("dy", 10);
+        .attr("y", util.dim.panelHeight * 2 + util.margin.between);
       
     if (panels === 1) {
         dashedLine.attr("d", util.line([
@@ -314,8 +313,7 @@ export function yGuide(selection, fxnInfo, params, yScaler, format = ",.0f") {
         .attr("class", "tick tick-y")
         .text(d3.format(format)(fxnInfo.fxn(params)))
         .attr("x", 0)
-        .attr("y", point[1])
-        .attr("dx", -10);
+        .attr("y", point[1]);
     
     return selection.node();
 }
