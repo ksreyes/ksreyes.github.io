@@ -73,9 +73,9 @@ p {
     margin: 1.25em 0;
 }
 
-::selection {
+::selection, .highlight {
     background: var(--yellow4);
-  }
+}
 
 strong {
     font-weight: 700;
@@ -228,6 +228,10 @@ svg {
 
         & .hero-bio {
             margin: 1rem 2rem;
+
+            & p {
+                font-size: 1.2em;
+            }
         }
 
         & .hero-buttons {
@@ -262,7 +266,7 @@ h1 .emph {
         align-items: center;
         text-align: center;
         color: white;
-        font-size: .80em;
+        font-size: .9em;
         border-radius: 3px;
     
         &:hover {
