@@ -37,6 +37,10 @@
         font-size: 1.4em;
         margin: 0;
     }
+
+    :not(p) + & {
+        margin-top: 4em;
+    }
 }
 
 .chart-source {
@@ -64,6 +68,18 @@
         color: var(--red1);
         text-shadow: 0 0 2px white;
         text-wrap: balance;
+    }
+}
+
+.math {
+    font-family: "Noto Serif", serif;
+
+    &.block-equation {
+        text-align: center;
+    }
+    
+    &.var, & .var {
+        font-style: italic;
     }
 }
 
@@ -163,7 +179,7 @@
     
     & .panels {
         display: grid;
-        grid-template-columns: repeat(2, minmax(158.5px, 475px));
+        grid-template-columns: repeat(2, minmax(158.25px, 475px));
         gap: clamp(10px, 2.5vw, 50px);
         justify-content: center;
         
@@ -177,10 +193,15 @@
 
     & .statistic {
         display: grid;
-        grid-template-columns: repeat(2, minmax(158.5px, 475px));
+        grid-template-columns: repeat(2, minmax(158.25px, 475px));
         gap: clamp(10px, 2.5vw, 50px);
         text-align: center;
         color: var(--green2);
+    }
+
+    @media (width <= 440px) and (orientation: portrait) {
+        grid-column: full-width;
+        padding: 0 1rem;
     }
 }
 
@@ -200,7 +221,7 @@
     & .graticule {
         fill: none;
         stroke: var(--blue6);
-        stroke-width: .5px;
+        stroke-width: .25px;
         stroke-opacity: 0;
     }
 
@@ -214,7 +235,7 @@
     .spike {
         fill: var(--red3);
         stroke: var(--red1);
-        stroke-width: .5px;
+        stroke-width: .25px;
         transition: opacity .25s;
 
         &.hide {
@@ -225,7 +246,7 @@
 
     & .control-panel {
         position: absolute;
-        top: 0;
+        top: .5em;
         right: 0;
 
         & .zoom-panel rect, & .spin-button rect {
@@ -274,23 +295,17 @@
         grid-template-columns: auto 50vw;
         column-gap: .25rem;
 
-        @media (max-width: 500px) {
-            bottom: .4rem;
-            left: .5rem;
-        }
-
         & .legend-spike-spike {
             fill: var(--red3);
             stroke: var(--red1);
-            stroke-width: .5px;
+            stroke-width: .25px;
             transition: opacity .25s;
         }
         
         & .legend-text {
             justify-self: end;
-            color: var(--blue1);
-            opacity: .9;
             font-size: clamp(0.7rem, 0.50rem + 0.60vw, 0.9rem);
+            mix-blend-mode: multiply;
         }
 
         & .legend-text.bottom {
@@ -309,6 +324,29 @@
             display: flex;
             align-items: center;
             justify-self: flex-start;
+        }
+    }
+
+    @media (width <= 440px) and (orientation: portrait) {
+
+        grid-column: full-width;
+
+        & .graphic-container {
+            display: flex;
+            flex-direction: column;
+            gap: .5em;
+        }
+
+        & .control-panel {
+            top: 1em;
+            right: 1em;
+        }
+
+        & .legend-spike {
+            position: static;
+            order: 3;
+            align-self: flex-start;
+            padding-left: 2em;
         }
     }
 

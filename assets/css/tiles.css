@@ -13,6 +13,18 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1em;
+
+}
+
+@media (width <= 440px) and (orientation: portrait) {
+
+    .projects {
+        grid-column: full-width !important;
+    }
+
+    .projects-tiles {
+        padding: 0 1rem;
+    }
 }
 
 /* Tile template */
