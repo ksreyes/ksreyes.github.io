@@ -159,7 +159,7 @@ export function profitMonoCompFxn({ q, fc, c } = {}) {
 }
 
 export function pMonoComp({ q, c }) {
-    return demandMonoCompFxn({ q: qMonoComp({ c }), c });
+    return demandMonoCompFxn({ q, c });
 }
 
 export function demandMonoCompInvFxn({ dmd, c } = {}) {

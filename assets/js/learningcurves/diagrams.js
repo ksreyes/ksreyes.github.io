@@ -1736,7 +1736,7 @@ export function figure10(container) {
 export function figure11(container) {
 
     const id = d3.randomInt(100000, 1000000)();
-    const params = { q: null, fc: null, p: null, c: null };
+    const params = { q: null, fc: 0, p: null, c: null };
     const axisTitlesTop = { x: "Output", y: "$" };
     const axisTitlesBottom = { x: "Output", y: "$/unit" };
 
@@ -1804,7 +1804,7 @@ export function figure11(container) {
         util.mrMonoComp.fxn = util.mrMonoCompFxn;
         util.profitMonoComp.fxn = util.profitMonoCompFxn;
 
-        const corners = { 
+        let corners = { 
             x1: 0, 
             y1: yScalerBottom(params.p), 
             x2: util.xScaler(params.q), 
