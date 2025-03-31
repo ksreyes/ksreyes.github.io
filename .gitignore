@@ -1,6 +1,7 @@
 .DS_Store
 .vscode/*
 data-raw
+cv
 
 # R
 .Rproj.user
