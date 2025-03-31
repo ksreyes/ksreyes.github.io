@@ -1,16 +1,11 @@
-import { spike } from "./spike.js";
+import { spike, spikeheight, spikewidth } from "./spike.js";
 import { zoompanel } from "./zoompanel.js";
 import { mmp } from "../icons/mmp-icon.js";
-// import { addFormsAnnotation, addLegendAnnotation } from "./annotations.js";
-import * as colors from "../colors.js";
 
-
-// Icon /////////////////////////////////////////
-
+// Icon
 d3.select(".mmp-icon").call(mmp);
 
-
-// Load data ////////////////////////////////////
+// Load data
 
 Promise.all([
     
@@ -30,7 +25,7 @@ Promise.all([
     drawGlobe(map, data); 
 });
 
-// Render graphic ///////////////////////////////
+// Render graphic
 
 function drawGlobe(map, dataAll) {
 
@@ -162,28 +157,11 @@ function drawGlobe(map, dataAll) {
     update();
 
     // Spin
-
-    // const years = d3.range(2014, 2024);
-    // let index = 0;
-    // let year = 2014;
     
     const revolutionDuration = 30000;
     let t1, dt, steps, xPos, yPos, t0, oldPos;
     t0 = 0;
     oldPos = 0;
-
-    // console.log(years[9])
-    
-    // d3.interval(() => {
-    //     year = years[index];
-    //     index = (index + 1) % years.length;
-
-    //     d3.selectAll(".graphic-container .show").classed("show", false);
-    //     d3.selectAll(".graphic-container .year-" + year)
-    //         .classed("show", true);
-    //     // update();
-
-    // }, 1000);
 
     d3.timer((elapsed) => {
         
@@ -216,7 +194,6 @@ function drawGlobe(map, dataAll) {
         updateSpinButton();
         
         rotate = projection.rotate();
-        const scale = projection.scale();
         const k = params.sensitivity / projection.scale();
         
         projection.rotate([rotate[0] + event.dx * k, rotate[1] - event.dy * k]);
@@ -268,12 +245,6 @@ function drawGlobe(map, dataAll) {
     };
 };
 
-
-const spikeheight = d3.scaleLinear()
-    .domain([1, 1022])
-    .range([1, 250]);
-
-const spikewidth = d => 2 * Math.pow(1.3, Math.log2(d / 300));
 
 const opacityScale = d3.scaleLinear()
     .domain(d3.range(2014, 2024))

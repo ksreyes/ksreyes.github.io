@@ -1,8 +1,4 @@
-import { spike } from "./spike.js";
-
-const spikeheight = d3.scaleLinear()
-    .domain([1, 1022])
-    .range([1, 250]);
+import { spike, spikeheight } from "./spike.js";
 
 // Spike height
 
@@ -39,17 +35,14 @@ function addSpikeItem(i, value, unit) {
         .attr("viewBox", [0, 0, spikeheight(value), p.spikewidth]);
     
     spikeItemContainer.append("g")
-        // .attr("transform", `translate(${-p.spikewidth}, ${ p.spikewidth / 2 })`)
         .attr("transform", `translate(0, ${ p.spikewidth / 2 })`)
         .append("polyline")
         .attr("class", "legend-spike-spike")
-        .attr("points", d => {
-            return spike()
-                .x(0).y(0)
-                .angle(0)
-                .width(p.spikewidth)
-                .height(spikeheight(value))
-                .closed(true)
-                ();
-            })
+        .attr("points", spike()
+            .x(0).y(0)
+            .angle(0)
+            .width(p.spikewidth)
+            .height(spikeheight(value))
+            ()
+        )
 };
