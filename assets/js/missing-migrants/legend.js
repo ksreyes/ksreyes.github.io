@@ -14,7 +14,7 @@ const p = {
 
 addSpikeItem(3, p.low, "dead");
 addSpikeItem(2, p.mid, "dead");
-addSpikeItem(1, p.high, "dead*");
+addSpikeItem(1, p.high, "dead");
 
 legendSpike.append("div")
     .attr("class", "legend-text bottom")
