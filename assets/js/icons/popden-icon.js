@@ -1,3 +1,6 @@
+import { forceLimit } from "../modules/d3-force-limit/index.js"
+import { forceSurface } from "../modules/d3-force-surface/index.js"
+import { forceBounce } from "../modules/d3-force-bounce/index.js"
 
 export function popden(container) {
 
@@ -49,13 +52,13 @@ export function popden(container) {
     
     // Define forces
     d3.forceSimulation(nodes)
-        .force("bounce", d3.forceBounce()
+        .force("bounce", forceBounce()
             .radius(d => d.r + .1))
-        .force("surface", d3.forceSurface()
+        .force("surface", forceSurface()
             .surfaces(bbox([[0, 0], [dim.width, dim.height]]))
             .oneWay(true)
             .radius(d => d.r + .1))
-        .force("limit", d3.forceLimit()
+        .force("limit", forceLimit()
             .x0(0)
             .x1(dim.width)
             .y0(0)

@@ -1,4 +1,7 @@
 import { popden } from "../icons/popden-icon.js";
+import { forceLimit } from "../modules/d3-force-limit/index.js"
+import { forceSurface } from "../modules/d3-force-surface/index.js"
+import { forceBounce } from "../modules/d3-force-bounce/index.js"
 import * as colors from "../colors.js";
 
 d3.select(".page-icon").call(popden);
@@ -170,13 +173,13 @@ function addParticles(container, density, assign, city) {
     
     // Define forces
     d3.forceSimulation(nodes)
-        .force("bounce", d3.forceBounce()
+        .force("bounce", forceBounce()
             .radius(d => d.r + .5))
-        .force("surface", d3.forceSurface()
+        .force("surface", forceSurface()
             .surfaces(bbox([[0, 0], [params.width, params.height]]))
             .oneWay(true)
             .radius(d => d.r + 1))
-        .force("limit", d3.forceLimit()
+        .force("limit", forceLimit()
             .x0(0).x1(params.width).y0(0).y1(params.height))
         .alphaDecay(0)
         .velocityDecay(0)
